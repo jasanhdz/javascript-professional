@@ -1,0 +1,17 @@
+{
+  "name": "jsprofessional",
+  "version": "1.0.0",
+  "description": "prácticas avanzadas de javascript",
+  "scripts": {
+    "start": "live-server"
+  },
+  "keywords": [
+    "javascript",
+    "professional"
+  ],
+  "author": "Jasan A. Hérnandez Bautista <jasan814@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
