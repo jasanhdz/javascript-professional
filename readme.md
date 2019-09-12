@@ -904,3 +904,35 @@ Resulta que las promesas van en otra cola, la cola de microtareas **Microtask Qu
   <img src="assets/microtaskpromise2.png" alt="microtaskpromise2">
   <img src="assets/microtaskpromisefin.png" alt="microtaskpromisefin">
 </div>
+
+## Promesas
+
+Ya vimos como el event loop procesa las promesas, ahora vamos a volver a las promesas, peroe sta vez vamos a ver como funciona el patrón de *.then* lo vamos a convertir a *async await* y también vamos a aprender diferentes patrones cuando escribimos funciones que nos regresan una promesa, todo esto para facilitar el desarrollo de nuestras apps, todo esto lo vamos a hacer con una api que es libre que se llamá [themoviedb](https://www.themoviedb.org/?language=es-ES).
+
+```js
+// The Movie Database API: https://developers.themoviedb.org/3/getting-started/introduction
+      const apiKey = 'b89fc45c2067cbd33560270639722eae';
+
+      function getMovie(id) {
+        const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
+        return fetch(url).then(response => response.json());
+      }
+
+      async function getPopularMovies() {
+        const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return fetch(url)
+          .then(response => response.json())
+          .then(data => data.results);
+      }
+
+      async function getTopMoviesIds(n = 3) {
+        return getPopularMovies().then(popularMovies => {
+          popularMovies.slice(0, n).map(movie => movie.id);
+        })
+      }
+```
+
+
+
