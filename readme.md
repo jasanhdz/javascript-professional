@@ -934,5 +934,363 @@ Ya vimos como el event loop procesa las promesas, ahora vamos a volver a las pro
       }
 ```
 
+## Getters y Setters
 
+Uno de los features modernos que trae javascript son getters y setters, son funciones que podemos utilizar dentro de objetos que nos permiten tener propiedades virtuales, es decir no es una propiedad que existe directamente en el objeto, pero atravez de un getter o setter podemos correr una fución que va ha calcular estos valores o va a mostrar una valor para establecer esté nuevo valor.
 
+Los getters los vamos a escribir usando el keyword get seguido de la propiedad virtual 
+
+```js
+let persona = {
+  nombre: 'Yeison',
+  apellido: 'Daza',
+  get nombreCompleto() {
+    return`${nombre}${apellido}`
+  },
+  set nombreCompleto(nom) {
+    const palabras = nom.split(' ');
+    this.nombre = palabras[0] || '';
+    this.apellido = palabras[1] || '';
+  }
+}
+persona.nombreCompleto = 'Camilo Sanchez'
+
+console.log(persona.nombre); //camilo
+console.log(persona.apellido); //sanchez
+```
+
+## Proxy
+
+Igual que los getters y setters el proxy es uno de los fetures más recientes del lenguaje, también igual que los getters y setters podemos intersectar, algunas llamadas a un objeto, sin embargo más alla de get y set, podemos intersectar muchisimas otras cosas. Si vamos a la documentación de proxy en [MDN]() vamos a encontrar una sección que dice *Methods of the handler object* (métodos del objeto manejador). Aquí vamos a encontrar a get y set, decimos que son trampas, cuando hay una llamada, la llamada va a caer en estas trampas si las tenemos definidas, en la trampa de get y de set, también hay trampas para ver el getPrototypeOf, handler.apply, handler.constructor, etc. 
+
+Esto nos va a permitir que antes de la llamada llegue al objeto al que tiene que llegar podemos manipularla. Hay una idea que se me hace muy interesante muy divertida, es un feature que tienen algunos programas como por ejemplo git, si vamos a la consola y escribimos mal el comando, no se ejecutara la instrucción pero nos devolvera una sugerencia a lo que escribimos o en dado caso de no tener una sugerencia, nos dara una lista de posibles comandos.
+
+Vamos a hacer esto mismo, pero en Javascript, que será interceptar las llamadas, si la propiedad que esta buscando el usuario no existe en un objeto, vamos a ver cuales son las que si existen para sugerir una.
+
+Para este ejemplo nos vamos a apoyar de una librería que se llama [fast-levenshtein](https://www.jsdelivr.com/package/npm/fast-levenshtein). Leveshtein es un algoritmo que va a encontrar la distancia entre 2 cadenas. Es decir si tenemos 2 cadenas y se diferencian por 1 sola letra, esa sería una distancia de 1, si se diferencian por 2 campos, sería una distancia de 2.
+
+```js
+// target es mi objeto a supervisar (sus propiedades pueden ser objetos, array, funciones, u otro proxy)
+const target = {
+  red: 'Rojo',
+  green: 'Verde',
+  blue: 'Azul'
+}
+// handler es un objeto con funciones (trampa) que definen las acciones a seguir cuando se accede al objeto supervisado
+const handler = {
+  get(obj, prop) {
+    if (prop in obj) {
+      // si la propiedad existe, pues retornamos su valor
+      return obj[prop]
+    }
+
+    // Si llega hasta aqui, vamos a ver si podemos retornar una sugerencia
+    const suggetion = Object.keys(obj).find(key => {
+      // creo un objeto con todas mis claves del objeto supervisado, y retorno aquella (nombre) 
+      // que su distancia sea <= 3 tomando como base la propiedad invocada
+      return Levenshtein.get(key, prop) <= 3 
+    })
+
+    
+    if (suggetion) {
+      console.log(`${prop} no se encontró. ¿Quisiste decir ${suggetion}?`);
+    }
+
+    return obj[prop];
+  }
+}
+const p = new Proxy(target, handler);
+
+p.red; // "Rojo"
+p.green; // "Verder"
+p.reed //reee no se encontró. ¿Quisiste decir red?
+p.geen //geen no se encontró. ¿Quisiste decir green?
+```
+
+## Generadores
+
+Los generadores sons funciones especiales, podemos iniciar su ejecución y detenerla a mitad, nuestro programa continua por otro sitio y luego podemos regresar a esta función generador y continuar su ejecución donde la dejamos, lo que esta muy interesante es que los generadores cuando los detemos se recuerdan de su contexto, cuales eran las variables que tenían en su scoope, veamos un ejemplo de como son las funciones.
+
+```js
+function* simpleGenerator() {
+  console.log("GENERATOR START");
+  console.log("GENERATOR END");
+}
+
+const gen = simpleGenerator();
+```
+
+Los generadores que se crean traen una función que se llama next(), es una forma de decirle al generador "continua tu ejecucíon" porque ahora esta suspendido, si hacemos next, escribira el generador en consola. Pero también regresa un objeto con los valores [value: undefine, y done: true], este es el valor de retorno del generador. Cuando donde es true quiere decir que el generador termino su ejecución.
+
+Para obtener value definido podemos utilizar un keyword que se llama yield(seder) y si ejecutamos next el yield cortara la ejecución y ahi terminará la ejecución y si queremos volver a ejecutar las instrucciones pendientes tenemos que volver a lanzar a next().
+
+```js
+function* simpleGenerator() {
+  console.log("GENERATOR START");
+  yield;
+  console.log("GENERATOR END");
+}
+
+const gen = simpleGenerator();
+gen.next()
+// GENERATOR START
+gen.next();
+// GENERATOR END
+```
+
+Algó muy interesantes es que cuando hacemos **yield** podemos regresar un valor 
+
+```js
+function* simpleGenerator() {
+  console.log("GENERATOR START");
+  yield 1; // {value: 1, done: false}
+  yield 2; // {value: 2, done: false}
+  yield 3; // {value: 3, done: false}
+  console.log("GENERATOR END");
+}
+
+const gen = simpleGenerator();
+gen.next()
+// GENERATOR START
+gen.next();
+// GENERATOR END
+```
+Generadores inifitos
+```js
+// Podemos hacer generadores infinitos
+function* idMaker() {
+  let id = 1;
+  while (true) {
+    yield id;
+    id += 1;
+  }
+}
+```
+Cuando llamamos a next también podemos pasar valores que la función recibe.
+
+```js
+function* idMakerWithReset() {
+  let id = 1;
+  let reset;
+  while (true) {
+    reset = yield id;
+    if (reset) {
+      id = 1;
+    } else {
+      id += 1;
+    }
+  }
+}
+```
+
+Los generadores se prestan para crear funciones eficientes en memoria, vamos a escribir la secuencia fibonacci, una función que imprima la secuencia, que lo que hace es sumar los dos número anteriores para generar uno nuevo.
+
+```js
+// Ahora hagamos un ejemplo un poco más complejo: la secuencia fibonacci
+function* fibonacci() {
+  let a = 1, b = 1;
+  while (true) {
+    const nextNumber = a + b;
+    a = b;
+    b = nextNumber;
+    yield nextNumber;
+  }
+}
+```
+
+Los generadores son funciones especiales cuya ejecución podemos comenzar y detener a mitad de vuelo y cuando queramos continuarla podemos llamar a next, podemos pasarle un valor al generador si hace falta y su ejecución va a continuar siempre recordanse del scope en el que estaba.
+
+## Como cancelar peticiones Fetch
+
+La peticiones AJAX permitieron en su tiempo hacer peticiones asíncronas al servidor sin tener que detener la carga de la página. Hoy en día se utiliza la función fetch para esto.
+
+Con fetch tenemos algo llamado AbortController que nos permite enviar una señal a una petición en plena ejecución para detenerla.
+
+AbortController nos va ha dar 2 controllers para poder detener una ejecución en este caso va ha ser la del fetch, la cual es una clase que trae el motor de javascript, la cual tenemos que instanciarla.
+
+```html
+<html>
+  <head>
+    <title>Abort Fetch</title>
+  </head>
+  <body>
+    <a href="/ejercicios/">Go back</a>
+    <p><em>Abre la consola</em></p>
+    <img id="huge-image" height="400" />
+    <button id="load">Load HUGE Image</button>
+    <button id="stop" disabled>Stop Fetching</button>
+    <script src="abort-fetch.js"></script>
+  </body>
+</html>
+```
+
+```js
+const url =
+  'https://images.pexels.com/photos/974470/nature-stars-milky-way-galaxy-974470.jpeg?q=100';
+      // Elementos del DOM imagen y 2 botones
+      const img = document.getElementById('huge-image');
+      const loadButton = document.getElementById('load');
+      const stopButton = document.getElementById('stop');
+      let controller;
+
+      // Función que habilita o desabilita un boton
+      function startLoading() {
+        loadButton.disabled = true;
+        // Camnbia el texto de su contenido
+        loadButton.innerText = 'Loading...';
+        stopButton.disabled = false;
+      }
+      // Funcíon que desabilita el boton de carga
+      function stopLoading() {
+        loadButton.disabled = false;
+        loadButton.innerText = 'Load HUGE Image';
+        stopButton.disabled = true;
+      }
+
+      loadButton.onclick = async function() {
+        // Se ejecuta startLoading que lo unico que hace es cambiar la apariencia del boton
+        // Para que se vea que esta cargando
+        startLoading();
+
+        // Declaramos la variable antes para despues tener acceso a ella
+        // en el boton de cancelar petición fetch
+        controller = new AbortController();
+        try {
+          // Hacemos la petición asincrona a la URL usando Async await
+          // Vamos a añadirle un objeto de configuración al fetch
+          // Esté objeto de configuración le vamos a pasar un objeto que se llama la señal
+          // La señal va a venir del abort controller
+          const response = await fetch(url, { signal: controller.signal });
+          // Vamos a obtener el binario de la imagen con blob img en forma binaria
+          const blob = await response.blob();
+          // Convertimos el blob binario a una URL, el navegador se encarga de asignar el blob una url
+          const imgUrl = URL.createObjectURL(blob);
+          // Ahora el src se lo asignamos a la url de la imagen
+          img.src = imgUrl;
+        } catch (error) {
+          console.log(error.message);
+        }
+
+        // Cuando la función asincrona se falle vamos a cambiar el boton a stop
+        stopLoading();
+      };
+
+      stopButton.onclick = function() {
+        // Si deseamos detener tenemos que llamar al abort controller.container
+        // El abort envia una señal al fetch y hace que la petición se cancele
+        controller.abort();
+
+        stopLoading();
+      };
+      
+```
+
+## Intersection Observer API
+
+La API Observador de Intersección, provee una vía para, de forma asíncrona, observar cambios en la intersección de un elemento con un elemento ancestro o con el viewport del documento de nivel superior.
+
+La información sobre intersección es necesaria por muchas razones, tales como:
+
+Lazy-loading de imágenes u otro contenido a medida que la página se desplaza.
+Implementación de “scroll infinito” de sitios web, donde más y más contenido se carga y muestra a medida que usted hace scroll, de forma que el usuario no tiene que pasar páginas.
+Informes de visualizaciones de anuncios para calcular ingresos por publicidad.
+Decidir si deben realizarse tareas o procesos de animación basados en si el usuario verá o no el resultado.
+
+### Creando un Intersection Observer
+
+Crear el intersection observer llamando a su constructor y pasándole una función callback para que se ejecute cuando un nivel (threshold) sea cruzado en una u otra dirección:
+
+```js
+var options = {
+  root: document.querySelector('#scrollArea'),
+  rootMargin: '0px',
+  threshold: 1.0
+}
+
+var observer = new IntersectionObserver(callback, options);
+```
+
+Un threshold de 1.0 significa que cuando el 100% del elemento target está visible dentro del elemento especificado por la opción root, la función callback es invocada.
+
+### Opciones de Intersection observer
+
+El objeto options pasado al constructor [IntersectionObserver()](https://developer.mozilla.org/es/docs/Web/API/IntersectionObserver/IntersectionObserver) le deja controlar las circunstancias bajo las cuales la función callback del observer es invocada. Tiene los siguientes campos:
+
+root
+
+El elemento que es usado como viewport para comprobar la visibilidad de elemento target. Debe ser un elemento ascendiente del target. Por defecto se toma el viewport del navegador si no se especifica o si se especifica como null.
+
+rootMargin
+
+Margen alrededor del elemeto root. Puede tener valores similares a los de CSS [margin](https://developer.mozilla.org/es/docs/Web/CSS/margin) property, e.g. "10px 20px 30px 40px" (top, right, bottom, left). Los valores pueden ser porcentajes. Este conjunto de valores sirve para aumentar o encoger cada lado del cuadro delimitador del elemento root antes de calcular las intersecciones. Por defecto son todos cero.
+
+threshold
+
+Es un número o un array de números que indican a que porcentaje de visibilidad del elemento target, la función callback del observer debería ser ejecutada. Si usted quiere que se detecte cuando la visibilidad pasa la marca del 50%, debería usar un valor de 0.5. Si quiere ejecutar la función callback cada vez que la visibilidad pase otro 25%, usted debería especificar el array [0, 0.25, 0.5, 0.75, 1]. El valor por defecto es 0 (lo que significa que tan pronto como un píxel sea visible, la función callback será ejecutada). Un valor de 1.0 significa que el umbral no se considera pasado hasta que todos los pixels son visibles.
+
+### Determinando un elemento para ser observado
+
+Una vez usted ha creado el observer, necesita darle un elemento target para observar:
+
+```js
+var target = document.querySelector('#listItem');
+observer.observe(target);
+```
+
+Cuando el elemento target encuentra un threshold especificado por el IntersectionObserver, la función callback es invocada. La función callback recibe una lista de objetos [IntersectionObserverEntry](https://developer.mozilla.org/es/docs/Web/API/IntersectionObserverEntry) y el observer:
+
+```js
+var callback = function(entries, observer) { 
+  entries.forEach(entry => {
+    // Cada entry describe un cambio en la intersección para
+    // un elemento observado
+    //   entry.boundingClientRect
+    //   entry.intersectionRatio
+    //   entry.intersectionRect
+    //   entry.isIntersecting
+    //   entry.rootBounds
+    //   entry.target
+    //   entry.time
+  });
+};
+```
+
+Asegúrese de que su función callback se ejecute sobre el hilo principal. Debería operar tan rápidamente como sea posible; si alguna cosa necesita tiempo extra para ser realizada, use [Window.requestIdleCallback()](https://developer.mozilla.org/es/docs/Web/API/Window/requestIdleCallback).
+
+También, note que si especifica la opción root, el elemento target debe ser un descendiente del elemento root.
+
+### Creación de Plugin para IntersectionObserver de nuestro videoplayer
+
+```js
+class AutoPause {
+  constructor() {
+    this.threshold = 0.25;
+    this.handlerIntersection = this.handlerIntersection.bind(this)
+  }
+  run(player) {
+    this.player = player;
+    // const observer = new IntersectionObserver(handler, config)
+    const observer = new IntersectionObserver(this.handlerIntersection, {
+      // threshold: umbral define que porciento del elemento tiene que tener interseccion
+      threshold: this.threshold
+    })
+
+    observer.observe(this.player.media) 
+  }
+  // Cuando intersectionObserver llame a handlerIntersection le va a pasar una lista de entries
+  // los entries son todos los objetos que estamos observando 
+  handlerIntersection(entries) {
+    const entry = entries[0];
+    console.log(entry);
+
+    const isVisible = entry.intersectionRatio >= this.threshold
+
+    if (isVisible) {
+      this.player.play();
+    } else {
+      this.player.pause();
+    }
+  }
+}
+export default AutoPause;
+```

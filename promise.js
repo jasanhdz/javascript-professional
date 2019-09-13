@@ -8,24 +8,34 @@
       // The Movie Database API: https://developers.themoviedb.org/3/getting-started/introduction
       const apiKey = 'b89fc45c2067cbd33560270639722eae';
 
-      function getMovie(id) {
+      // function getMovie(id) {
+      //   const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
+      //   return fetch(url).then(response => response.json());
+      // }
+
+      async function getMovie(id) {
         const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
-        return fetch(url).then(response => response.json());
+        const response = await fetch(url)
+        const data = await response.json();
+        return data;
       }
 
       async function getPopularMovies() {
         const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}`;
         const response = await fetch(url);
         const data = await response.json();
-        return fetch(url)
-          .then(response => response.json())
-          .then(data => data.results);
+        return data.results;
       }
 
       async function getTopMoviesIds(n = 3) {
-        return getPopularMovies().then(popularMovies => {
-          popularMovies.slice(0, n).map(movie => movie.id);
-        })
+        // try {
+        //   const popularMovies = await getPopularMovies();
+        // } catch(error) {
+        //   console.log(error);
+        // }
+        const popularMovies = await getPopularMovies();
+        const ids = popularMovies.slice(0, n).map(movie => movie.id);
+        return ids;
       }
 
       function renderMovies(movies) {
@@ -43,6 +53,8 @@
           movieList.appendChild(listItem);
         });
       }
+
+      // Peliculas en secuencia
 
       async function getTopMoviesInSequence() {
         const ids = await getTopMoviesIds();

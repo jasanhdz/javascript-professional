@@ -12,6 +12,6 @@
   "author": "Jasan A. Hérnandez Bautista <jasan814@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "live-server": "^1.2.1"
+    "live-server": "1.2.1"
   }
 }
