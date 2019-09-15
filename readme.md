@@ -1294,3 +1294,146 @@ class AutoPause {
 }
 export default AutoPause;
 ```
+
+## Visibility Change
+
+El visibilityChange forma parte del API del DOM llamado Page Visibility y nos deja saber si el elemento es visible, pude ser usado para ejecutar una acción cuando cambiamos de pestaña. Así podemos ahorrar batería y mejorar la UX.
+
+El documento DOM ahora tiene un elemento que podemos escuchar.
+```js
+document.addEventListener('visibilitychange', () => {
+  console.log(document.visibilityState);
+})
+```
+
+Usando este evento nosotros podemos salirnos del navegador, también podemos cambiar de pestaña y el DOM lo sabrá. Usemos esto en nuestro plugin para que cuando cambiemos de tab el video se detenga. En el método run es cuando los plugins se echan a correr, aquí es un buen momento, para conectarnos a este evento y que cuando suceda tomar acción.
+
+```js
+run(player) {
+    this.player = player;
+    // const observer = new IntersectionObserver(handler, config)
+    const observer = new IntersectionObserver(this.handlerIntersection, {
+      // threshold: umbral define que porciento del elemento tiene que tener interseccion
+      threshold: this.threshold
+    })
+
+    observer.observe(this.player.media) 
+    // Ejecutamos el evento VisiblityChange y ejecutamos una función
+    document.addEventListener('visibilitychange', this.handleVisibilityChange)
+  }
+  handleVisibilityChange() {
+    const isVisible = document.visibilityState === "visible";
+    if (isVisible) {
+      this.player.play();
+    } else {
+      this.player.pause();
+    }
+  }
+```
+
+El evento visibilityChange es un evento muy simple pero muy util, nos deja saber si el tab es el que esta hasta el frente, el tab que el usuario esta viendo, si cambiamos de tab nos permite cambiar acción, no solo nos permite ver un video, también pudiera ser cambiar el titulo de la pestaña, y asi decirle al dom que haga otras acciones, que pueden ahorrar bateria o mejorar el rendimiento de nuestras aplicaciones.
+
+
+## Service worker
+
+Una de las nuevas tendencias en el desarrollo web, son las pwa o _progressive web apps_, dentro de las varias cosas que ofrecen está que tu app funcione offline, esto lo hacemos posible usando los services workers, **services workers es una capa que va a vivir entre el navegador y el internet**. Lo que van a hacer es algo parecido a los proxys, van a interceptar peticiones, en esté caso las peticiones vamos a tener la oportunidad de hagarrar la petición, buscar la respuesta pero antes de regresarla al browser la vamos a guardar en cache 
+
+¿Qué pasa una vez que lo tenemos en cache?
+
+La proxima vez que ocurra una petición, en lugar de tener que ir a internet, ya tenemos la respuesta, así que nadamas la regresamos, imaginate un usuario que va dentro del metro se mete en un tunel y pierde conectividad, va a seguir utilizando tu aplicación porque usando service workers, va a funcionar offline.
+
+Vamos a añadirselo a nuestro VideoPlayer.
+
+1. Primero vamos a crear una condición, está condición nos va a servir si el navegador del usuario le da apoyo a los services workets, como es un feature reciente, no todos los navegadores tienen service workets.
+```js
+if ('serviceworkets' in navigator) 
+```
+2. Despues dentro del service workets vamos a registrar un archivo, esté archivo va a ser el serice worker tal cual, pero es posible que dentro del registro ocurra un error, asi que es importante ver ese error.
+```js
+  navigator.serviceWorker.register('/sw.js')
+    .catch(error => {
+      console.log(error.message);
+  })
+```
+3. En el nivel más alto del proyecto vamos a escribir el archivo del services worker. Aquí es donde vamos a escribir el código.
+
+Los services workers se instalan, el navegador lo va a instalar en la computadora del usuario, no es lo mismo que una aplicación, pero si va a vivir dentro del navegador, entonces cada vez que nostros hagamos cambios hay que volver a instalarlos, esto va suceder cuando el usuario este usando la aplicación en producción pero cuando estamos en desarrollo queremos que esto suceda rápido, no con la lentitud que pueda suceder en producción. Para hacerlo hay que activar *updated on reload* en las devtools
+
+4. Vamos a escribir el código del service worker
+
+```js
+// Self hace refencia al service worker es como this a los objetos
+self.addEventListener('install', event => {
+  // Creamos un precache con una lista de recursos que queremos que mantenga en cache
+  event.waitUntil(precache());
+})
+
+// Cuando ocurra una petición queremos a ir al cache para ver si encontramos la respuesta
+self.addEventListener('fetch', event => {
+  // Extraemos la petición
+  const request = event.request;
+  // Solo queremos hacer algo con las peticiones que son GET
+  if (request.method !== "GET")
+    return;
+  
+  // actualizar el cache
+  event.waitUntil(updateCache(cache))
+
+  
+  // Buscamos en el cache
+  // event tiene otra función que se llamá responder con responseWith
+  // vamos a responder con una respuesta cacheada
+  event.respondWith(cachedResponse(request))
+})
+
+// Escribimos la función del precache
+async function precache() {
+  // Para trabajar con cache tenemos que trabajar con una parte
+  // de la api del dom que se llamá caches, y lo que hay que hacer es abrir un cache en especifico
+  // Creamos una instancia de cache que le va a pertenecer o se va a llamar v1,
+  // podemos ponerle como queramos porque apenas estamos haciendo una instancia,
+  // este cache regresa una promesa, por lo cual hay que esperarla
+  const cache = await caches.open("v1");
+
+  // Una vez tenemos la instancia de cache queremos añadir varios recursos
+  // añadirmos todos nuestro recursos, los cuales son todos lo archivos que hemos escrito
+  // Tenemos que regresarlo porque devuelve una promesa
+  return cache.addAll([
+    // Es muy importante asignarne este request
+    '/',
+    'index.html',
+    'styles.css',
+    'MediaPlayer.js',
+    'index.js',
+    'plugins/AutoPause.js',
+    'plugins/AutoPlay.js',
+    'buckbunny.mp4'
+  ]);
+
+
+}
+
+// vamos a pasarle el request
+async function cachedResponse(request) {
+// Comenzamos abriendo el cache 
+  const cache = await caches.open("v1");
+  // debemos checar si en el cache tenemos la contestanción al request
+  // Para hacer eso vamos a guardalo en el response
+  // Estamos preguntando al cache
+  // ¿Ya tienes una copia que le corresponse al request?
+  const response = await cache.match(request)
+  // Como es posible que este response sea undefine, tenemos que contestar con lo que nos de la red
+  return response || fetch(request);
+
+}
+
+async function updateCache(request) {
+  const cache = await caches.open("v1");
+  const response = await fetch(request);
+  return cache.put(request, response)
+}
+```
+
+
+
+
