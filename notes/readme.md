@@ -1752,3 +1752,182 @@ let john = new Person("John"); // Error: The 'Person' constructor is protected
 
 Quick fix es algo que vas a poder usar si usas typescript y visual studio code, vsc ya trae un plugin que habilita todas estas funcionalidades de a gratis, esa es una buenas convinaciones en el desarrollo de js. vscode y typescript.
 
+### Refactorización
+
+La [refactorización del código fuente](https://en.wikipedia.org/wiki/Code_refactoring) puede mejorar la calidad y la facilidad de mantenimiento de su proyecto al reestructurar su código sin modificar el comportamiento del tiempo de ejecución. Visual Studio Code admite operaciones de refactorización (refactorizaciones) como el Método deextracción y la [Variable de extracción](https://refactoring.com/catalog/extractVariable.html) para mejorar su base de código desde su editor.
+
+**La refactorización de código** es el proceso de reestructurar el código de computadora existente, cambiar la [factorización](https://en.wikipedia.org/wiki/Decomposition_(computer_science)), sin cambiar su comportamiento externo. La refactorización está destinada a mejorar los atributos [no funcionales](https://en.wikipedia.org/wiki/Non-functional_requirement) del [software](https://en.wikipedia.org/wiki/Software) . Las ventajas incluyen [legibilidad](https://en.wikipedia.org/wiki/Readability) mejorada del código y [complejidad] reducida ; Estos pueden mejorar el [mantenimiento del código fuente](https://en.wikipedia.org/wiki/Maintainability) y crear una [arquitectura] interna más expresiva o [un modelo de objeto] para mejorar la [extensibilidad](https://en.wikipedia.org/wiki/Extensibility).
+
+## Patrones de diseño
+
+Los patrones de diseño son unas técnicas para resolver problemas comunes en el [desarrollo de software](https://es.wikipedia.org/wiki/Ingenier%C3%ADa_de_software) y otros ámbitos referentes al diseño de interacción o interfaces.
+
+Un patrón de diseño resulta ser una solución a un problema de diseño. Para que una solución sea considerada un patrón debe poseer ciertas características. Una de ellas es que debe haber comprobado su efectividad resolviendo problemas similares en ocasiones anteriores. Otra es que debe ser reutilizable, lo que significa que es aplicable a diferentes problemas de diseño en distintas circunstancias.
+
+**Sumary**:
+Los patrones de diseño son como recetas que resuelven problemas que nos enfrentamos frecuentemente en el diseño de software, en especifico, son una solución de un problema dentro de un contexto, y esté contexto no se vale que ocurra una sola vez, tiene que pasar muchas veces. Porque si ocurriera una sola vez, fuera una solución pero no lo podemos categorizar como un patrón de diseño, los patrones de diseño van a resolver problemas dentro de un contexto recurrente.
+
+### Objetivos de los patrones de diseño
+
+Los patrones de diseño pretenden:
+
+- Proporcionar catálogos de elementos reusables en el diseño de sistemas software.
+- Evitar la reiteración en la búsqueda de soluciones a problemas ya conocidos y solucionados anteriormente.
+- Formalizar un vocabulario común entre diseñadores.
+- Estandarizar el modo en que se realiza el diseño.
+- Facilitar el aprendizaje de las nuevas generaciones de diseñadores condensando conocimiento ya existente.
+
+Asimismo, no pretenden:
+
+- Imponer ciertas alternativas de diseño frente a otras.
+- Eliminar la creatividad inherente al proceso de diseño.
+
+No es obligatorio utilizar los patrones, solo es aconsejable en el caso de tener el mismo problema o similar que soluciona el patrón, siempre teniendo en cuenta que en un caso particular puede no ser aplicable. "Abusar o forzar el uso de los patrones puede ser un error".
+
+### Historia sobre Patrones de diseño
+
+No los inventaron los ingenieros de software, programadores o desarrolladores, los patrones de diseño vienen de la arquitectura de estos 2 libros: [The timeless way of building](https://en.wikipedia.org/wiki/The_Timeless_Way_of_Building) y [A Pattern Language](https://en.wikipedia.org/wiki/A_Pattern_Language) escritos por [Christopher Alexander](https://en.wikipedia.org/wiki/Christopher_Alexander). 
+
+Lo que buscaba este author era reconocer ciertos patrones que el veía en la arquitectura, no solo en la moderna sino en la arquitectura de toda la historia y así poder construir un lenguje. Cuando tienes un lenguaje sobre todos estos conceptos y entre arquitectos se hablan estas palabras, saben que se estan referiendo a algo exactamente, algo muy particular, una idea exacta, y cuando los recopilas estas creando un recetario para futuras generaciones de arquitectos que vallan a hacer nuevos edificios, nadie quiere reinventar la rueda cuando ya la inventamos y admeás funciona bien.
+
+De aquí 4 personas que conocemos como el  Gang of Four (GoF) o Ganga de cuatro compuesto por **Erich Gamma**, **Richard Helm**, **Ralph Johnson** y **John Vlissides**, en el que se recogían 23 patrones de diseño comunes. Son 4 authores que escribieron un libro famosisimo que se llamá [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns). 
+
+
+Es de  aquí que el sofware comienza a tomar estás ideas, es un libro de los 90s pero su importancia y validez aún se mantiene. 
+
+### Beneficios de utilizar patrones de diseño
+
+- Son una caja bien probadas a problemas comunes en diseño de software.
+- Te proveen un lenguaje común que te permiten comunicarte de una forma especifica y eficiente.
+
+### Desventajas de utilizar patrones de diseño
+
+- Introducen un nivel de complejidad
+- Son soluciones a las limitaciones de un lenguaje de programación. ejemplo: Java o C# no tienen funciones de alto nivel.
+- "Cuando lo que tienes es un martillo, todo te parece un clavo".
+
+No es algo que constamente vamos a estar buscando usar, siempre debemos tratar de resolver los problemas de una forma simple natural, pero cuando ya vemos que no hay una forma fácil, podemos ir a los patrones de diseño y decir, vemos si ya una solución detallada que podamos aplicar.
+
+Los patrones, como todas las formas de complejidad, deben evitarse hasta que sean absolutamente necesarios.
+
+Recuerda no siempre estar pensando en patrones de diseño deja que naturalmente surgan las necesidades para usarlos, porque siempre preferimos tener programas que sean simples y recuerda que los patrones de diseño van a incluir un nivel de complejidad.
+
+saber más [codigohorror](https://blog.codinghorror.com/head-first-design-patterns/)
+
+## Categorias de patrones de diseño
+
+El libro design patterns de GoF definio la lita inicial de patrones de diseño de software, los dividio en 3 categorias:
+
+- Patrones creacionales
+- Patrones estructurales
+- Patrones de comportamiento
+
+## Patrones Creacionales
+
+Proveen diferentes mecanismos para crear objetos. Nos ayudan a encapsular y abstraer dicha creación:
+
+[Object Pool](https://es.wikipedia.org/wiki/Object_pool_(patr%C3%B3n_de_dise%C3%B1o)) (Pisicina de objetos): no pertenece a los patrones especificados por GoF): se obtienen objetos nuevos a través de la clonación. Utilizado cuando el costo de crear una clase es mayor que el de clonarla. Especialmente con objetos muy complejos. Se especifica un tipo de objeto a crear y se utiliza una interfaz del prototipo para crear un nuevo objeto por clonación. El proceso de clonación se inicia instanciando un tipo de objeto de la clase que queremos clonar.
+
+[Abstract Factory](https://es.wikipedia.org/wiki/Abstract_Factory) (fábrica abstracta): permite trabajar con objetos de distintas familias de manera que las familias no se mezclen entre sí y haciendo transparente el tipo de familia concreta que se esté usando. El problema a solucionar por este patrón es el de crear diferentes familias de objetos, como por ejemplo, la creación de interfaces gráficas de distintos tipos (ventana, menú, botón, etc.).
+
+[Builder](https://es.wikipedia.org/wiki/Builder_(patr%C3%B3n_de_dise%C3%B1o)) (constructor virtual): abstrae el proceso de creación de un objeto complejo, centralizando dicho proceso en un único punto.
+
+Es usado para permitir la creación de una variedad de objetos complejos desde un objeto fuente. Es como si tenemos un punto de partida que es esté objeto y vamos a poder tomar varios caminos dependiendo de cuales funciones o métodos llamemos.
+
+Separa la creación de objeto complejo de su estructura, de tal forma que el mismo proceso de construcción puede servir para crear representaciones diferentes.
+
+[Factory Method](https://es.wikipedia.org/wiki/Factory_Method_(patrón_de_diseño)) (método de fabricación): centraliza en una clase constructora la creación de objetos de un subtipo de un tipo determinado, ocultando al usuario la casuística, es decir, la diversidad de casos particulares que se pueden prever, para elegir el subtipo que crear. Parte del principio de que las subclases determinan la clase a implementar. A continuación se muestra un ejemplo de este patrón:
+
+```java
+class ConcreteCreator extends Creator{
+    protected Product factoryMethod(){
+        return new ConcreteProduct();
+    }
+}
+
+interface Product{...}
+
+class ConcreteProduct implements Product{...}
+
+public class Client{
+    public static void main(String args[])
+    {
+        Creator unCreator = new ConcreteCreator();
+        unCreator.factoryMethod();
+    }
+}
+```
+
+[Prototype](https://es.wikipedia.org/wiki/Prototipo_(patr%C3%B3n_de_dise%C3%B1o)) (prototipo): crea nuevos objetos clonándolos de una instancia ya existente.
+
+[Singleton](https://es.wikipedia.org/wiki/Singleton) (instancia única): garantiza la existencia de una única instancia para una clase y la creación de un mecanismo de acceso global a dicha instancia. Restringe la instanciación de una clase o valor de un tipo a un solo objeto. A continuación se muestra un ejemplo de este patrón:
+
+ejemplo en Java:
+
+```java
+public sealed class Singleton
+{
+    private static volatile Singleton instance;
+    private static object syncRoot = new Object();
+    private Singleton()
+    {
+        System.Windows.Forms.MessageBox.Show("Nuevo Singleton");
+    }
+    public static Singleton GetInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                lock(syncRoot)
+                {
+                    if (instance == null)
+                    instance = new Singleton();
+                }
+            }
+            return instance;
+        }
+    }
+}
+```
+
+Ejemplo en JavaScript con TypeScript:
+
+```ts
+
+```
+
+[Model View Controller](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador) (MVC) ♙En español: Modelo Vista Controlador. Es un patrón de arquitectura de software que separa los datos y la lógica de negocio de una aplicación de la interfaz de usuario y el módulo encargado de gestionar los eventos y las comunicaciones. Este patrón plantea la separación del problema en tres capas: la capa model, que representa la realidad; la capa controller , que conoce los métodos y atributos del modelo, recibe y realiza lo que el usuario quiere hacer; y la capa vista, que muestra un aspecto del modelo y es utilizada por la capa anterior para interactuar con el usuario.
+
+## Patrones estrucuturales
+
+Describen formas de componer  objetos para formar nuevas estructuras flexibles y eficientes.
+
+- [Adapter o Wrapper](https://es.wikipedia.org/wiki/Adaptador_(patr%C3%B3n_de_dise%C3%B1o)) (Adaptador o Envoltorio): Adapta una interfaz para que pueda ser utilizada por una clase que de otro modo no podría utilizarla.
+- [Bridge](https://es.wikipedia.org/wiki/Bridge_(patrón_de_diseño)) (Puente): Desacopla una abstracción de su implementación.
+- [Composite](https://es.wikipedia.org/wiki/Composite_(patr%C3%B3n_de_dise%C3%B1o)) (Objeto compuesto): Permite tratar objetos compuestos como si de uno simple se tratase.
+- [Decorator](https://es.wikipedia.org/wiki/Decorator_(patr%C3%B3n_de_dise%C3%B1o)) (Decorador): Añade funcionalidad a una clase dinámicamente.
+- [Facade](https://es.wikipedia.org/wiki/Facade_(patr%C3%B3n_de_dise%C3%B1o)) (Fachada): Provee de una interfaz unificada simple para acceder a una interfaz o grupo de interfaces de un subsistema.
+- [Flyweight](https://es.wikipedia.org/wiki/Flyweight_(patr%C3%B3n_de_dise%C3%B1o)) (Peso ligero): Reduce la redundancia cuando gran cantidad de objetos poseen idéntica información.
+- [Proxy](https://es.wikipedia.org/wiki/Proxy_(patr%C3%B3n_de_dise%C3%B1o)): Proporciona un intermediario de un objeto para controlar su acceso.
+- [Module](https://es.wikipedia.org/wiki/M%C3%B3dulo_(patr%C3%B3n_de_dise%C3%B1o)): Agrupa varios elementos relacionados, como clases, singletons, y métodos, utilizados globalmente, en una entidad única.
+
+## Patrones de comportamiento
+
+Gestionan algoritmos y responsabilidades. Estos patrones lo que ofrecen son formas de poder manejar diferentes algoritmos, funcionalidades que pueden llegar a tener tus objetos o las relaciones entre ellos.
+
+Se definen como patrones de diseño software que ofrecen soluciones respecto a la interacción y responsabilidades entre clases y objetos, así como los algoritmos que encapsulan:
+
+[Chain of Responsibility]() (Cadena de responsabilidad): Permite establecer la línea que deben llevar los mensajes para que los objetos realicen la tarea indicada.
+[Command]() (Orden): Encapsula una operación en un objeto, permitiendo ejecutar dicha operación sin necesidad de conocer el contenido de la misma.
+[Interpreter]() (Intérprete): Dado un lenguaje, define una gramática para dicho lenguaje, así como las herramientas necesarias para interpretarlo.
+[Iterator]() (Iterador): Permite realizar recorridos sobre objetos compuestos independientemente de la implementación de estos.
+[Mediator]() (Mediador): Define un objeto que coordine la comunicación entre objetos de distintas clases, pero que funcionan como un conjunto.
+[Memento]() (Recuerdo): Permite volver a estados anteriores del sistema.
+[Observer]() (Observador): Define una dependencia de uno-a-muchos entre objetos, de forma que cuando un objeto cambie de estado se notifique y actualicen automáticamente todos los objetos que dependen de él.
+[State]() (Estado): Permite que un objeto modifique su comportamiento cada vez que cambie su estado interno.
+[Strategy]() (Estrategia): Permite disponer de varios métodos para resolver un problema y elegir cuál utilizar en tiempo de ejecución.
+[Template Method]() (Método plantilla): Define en una operación el esqueleto de un algoritmo, delegando en las subclases algunos de sus pasos, esto permite que las subclases redefinan ciertos pasos de un algoritmo sin cambiar su estructura.
+[Visitor]() (Visitante): Permite definir nuevas operaciones sobre una jerarquía de clases sin modificar las clases sobre las que opera.
+
+
