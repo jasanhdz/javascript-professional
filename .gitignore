@@ -1,4 +1,10 @@
 buckbunny.mp4
+
+# Carpetas bundle Typescript 
+.cache
+dist
+
+
 # Logs
 logs
 *.log

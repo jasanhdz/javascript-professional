@@ -1434,6 +1434,321 @@ async function updateCache(request) {
 }
 ```
 
+## Typescript
 
+TypeScript es un superset de JavaScript que añade tipos a nuestras variables ayudando así a la detección de errores de forma temprana y mejorando el autocompletado.
 
+Los navegadores no entienden TypeScript así que lo vamos a transpilar a JavaScript usando **Parcel**.
+
+``yarn add parcel-bundler --dev``
+
+Agregamos un par de configuraciones a nuestro packages.json
+
+```json
+"scripts": {
+    "start": "parcel index.html player-video/index.html player-video/**/*.html"
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
+```
+
+TypeScript es un lenguaje de programación libre y de **código abierto** desarrollado y mantenido por **Microsoft**. Es un superconjunto de JavaScript, que esencialmente añade tipos estáticos y objetos basados en clases. [Anders Hejlsberg](https://es.wikipedia.org/wiki/Anders_Hejlsberg), diseñador de C# y creador de Delphi y Turbo Pascal, ha trabajado en el desarrollo de TypeScript.1​ TypeScript puede ser usado para desarrollar aplicaciones JavaScript que se ejecutarán en el lado del cliente o del servidor (**Node.js**).
+
+TypeScript extiende la sintaxis de JavaScript, por tanto cualquier código JavaScript existente debería funcionar sin problemas. Está pensado para grandes proyectos, los cuales a través de un compilador de TypeScript se traducen a código JavaScript original.
+
+## Tipos básicos en Typescript
+
+- boolean. Valor verdadero o falso.
+- number. Números.
+- string. Cadenas de texto.
+- string[]. Arreglo del tipo cadena de texto.
+- Array. Arreglo multi-tipo, acepta cadenas de texto o números.
+- enum. Es un tipo especial llamado enumeración.
+- any. Cualquier tipo.
+- object. Del tipo objeto.
+
+```ts
+// TypeScript por Jasan Hernández
+// Boolean
+let muted: boolean = true;
+muted = false;
+
+// Numbers
+let numerador: number = 42;
+let denomindador: number = 6;
+let resultado = numerador / denomindador;
+
+// String
+let nombre: string = "Jasan";
+let saludo: string = `Me llamo ${nombre}`;
+
+// Arreglos
+let people: string[] = [];
+people = ["Isabel", "Nicole", "Raúl"];
+// people.push(34);
+
+// Arreglos de Strings and numbers:
+let peopleAndNumbers: Array<string | number> = [];
+peopleAndNumbers.push("Ricardo");
+peopleAndNumbers.push(345);
+
+// Enum
+enum Color {
+  Rojo = "Rojo",
+  Verde = "Verde",
+  Azul = "Amarillo",
+}
+let colorFavorito: Color = Color.Azul;
+console.log(`Mi color favorito es: ${colorFavorito}`);
+
+// Any
+let comodin: any  = "Joker";
+comodin = { type: "WildCard" }
+
+// Object 
+let someObject: object = { type: "WildCard" };
+```
+
+## Funciones en Typescript
+
+En Javascript las funciones toman argumentos y pudieran regresar algun valor. **En Typescript** podemos ser explicitos de como deben ser esos argumentos y también podemos proveer información de cual es valor que debe regresar la función.
+
+Typescript va a evitar que cometamos erroes que le puedan pasar a cualquiera, typescript es programación pareja, escribes y tu pareja te va diciendo ahi tienes un error.
+
+```ts
+// Funciones
+function add(a: number, b: number): number {
+  return a + b;
+}
+const sum = add(4, 25)
+
+function createAdder(a: number): (number) => number {
+  return function (b: number) {
+    return a + b;
+  }
+}
+
+const addFour = createAdder(4);
+const fourPlus6 = addFour(6);
+
+function fullName(firtsName: string, lastName?: string): string {
+  return `${firtsName} ${lastName}`;
+}
+const jasan = fullName('Jasan');
+
+function fullValue(firtsName: string = "Pepe", lastName: string = "Smith"): string {
+  return `${firtsName} ${lastName}`;
+}
+const person = fullValue();
+```
+
+## Interfaces en Typescript
+
+Las interfaces nos permiten declarar la forma que tiene un objeto, esto puede ser útil, porque nos ayuda en autocompletado y evitar cometer algunos erroes.
+
+```ts
+enum Color {
+  Rojo = "Rojo",
+  Verde = "Verde"
+};
+
+interface Rectangulo {
+  height: number,
+  width: number
+  color?: Color
+}
+
+let rect: Rectangulo = {
+  height: 4,
+  width: 3,
+  // color: Color.Verde
+}
+
+function area(r: Rectangulo) {
+  return r.height * r.width;
+}
+
+const areaReact = area(rect);
+rect.toString = function () {
+  return this.color ? `Un rectangulo ${this.color}` : `Un rectangulo`;
+}
+
+console.log(rect.toString());
+```
+
+Las interfaces definen la forma exacta que debe tener un objeto, no podemos añadir propiedades de más, ni de menos, en caso de que una propiedad sea opcional, la tenemos que marcar como opcional
+
+## Clases en typescript
+
+JavaScript tradicional utiliza funciones y herencia basada en prototipos para construir componentes reutilizables, pero esto puede resultar un poco incómodo para los programadores más cómodos con un enfoque orientado a objetos, donde las clases heredan la funcionalidad y los objetos se crean a partir de estas clases. A partir de ECMAScript 2015, también conocido como ECMAScript 6, los programadores de JavaScript podrán construir sus aplicaciones utilizando este enfoque basado en clases orientado a objetos. En TypeScript, permitimos que los desarrolladores usen estas técnicas ahora y las compilen en JavaScript que funcione en todos los principales navegadores y plataformas, sin tener que esperar a la próxima versión de JavaScript.
+
+Echemos un vistazo a un ejemplo simple basado en clases:
+
+```ts
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        return"Hello, " + this.greeting;
+    }
+}
+
+let greeter = new Greeter("world");
+```
+
+La sintaxis debería resultarle familiar si ha usado C # o Java anteriormente. Declaramos una nueva clase Greeter. Esta clase tiene tres miembros: una propiedad llamada greeting, un constructor y un método greet.
+
+Notarás que en la clase cuando nos referimos a uno de los miembros de la clase que anteponemos this.. Esto denota que es un acceso de miembro.
+
+En la última línea construimos una instancia de la Greeterclase usando new. Esto llama al constructor que definimos anteriormente, creando un nuevo objeto con la Greeterforma y ejecutando el constructor para inicializarlo.
+
+### Herencia typescript
+
+En TypeScript, podemos usar patrones comunes orientados a objetos. Uno de los patrones más fundamentales en la programación basada en clases es poder extender las clases existentes para crear otras nuevas usando la herencia.
+
+Echemos un vistazo a un ejemplo:
+```ts
+class Animal {
+    move(distanceInMeters: number = 0) {
+        console.log(`Animal moved ${distanceInMeters}m.`);
+    }
+}
+
+class Dog extends Animal {
+    bark() {
+        console.log('Woof! Woof!');
+    }
+}
+
+const dog = new Dog();
+dog.bark();
+dog.move(10);
+dog.bark();
+```
+Este ejemplo muestra la característica de herencia más básica: las clases heredan propiedades y métodos de las clases base. Aquí, Doghay una clase derivada que deriva de la clase Animalbase usando la extendspalabra clave. Las clases derivadas a menudo se denominan subclases , y las clases base a menudo se denominan superclases .
+
+Debido a que Dogextiende la funcionalidad desde Animal, pudimos crear una instancia de Dogque podría ambos bark()y move().
+
+## Modificadores públicos, privados y protegidos en Typescript
+
+### Público por defecto
+
+En nuestros ejemplos, hemos podido acceder libremente a los miembros que declaramos en todos nuestros programas. Si está familiarizado con las clases en otros idiomas, puede haber notado en los ejemplos anteriores que no hemos tenido que usar la palabrapublic para lograr esto; por ejemplo, C # requiere que cada miembro esté explícitamente etiquetado publiccomo visible. En TypeScript, cada miembro es publicpor defecto.
+
+Aún puede marcar un miembro publicexplícitamente. Podríamos haber escrito la Animalclase de la sección anterior de la siguiente manera:
+
+```ts
+class Animal {
+    public name: string;
+    publicconstructor(theName: string) { this.name = theName; }
+    public move(distanceInMeters: number) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+}
+```
+
+### Comprensión private
+Cuando se marca un miembro private, no se puede acceder desde fuera de su clase que lo contiene. Por ejemplo:
+
+```ts
+class Animal {
+    private name: string;
+    constructor(theName: string) { this.name = theName; }
+}
+
+new Animal("Cat").name; // Error: 'name' is private;
+```
+TypeScript es un sistema de tipo estructural. Cuando comparamos dos tipos diferentes, independientemente de su procedencia, si los tipos de todos los miembros son compatibles, entonces decimos que los tipos mismos son compatibles.
+
+Sin embargo, al comparar tipos que tienen privatey protectedmiembros, tratamos estos tipos de manera diferente. Para que dos tipos se consideren compatibles, si uno de ellos tiene un privatemiembro, el otro debe tener un privatemiembro que se originó en la misma declaración. Lo mismo se aplica a los protectedmiembros.
+
+Veamos un ejemplo para ver mejor cómo se desarrolla esto en la práctica:
+
+```ts
+class Animal {
+    private name: string;
+    constructor(theName: string) { this.name = theName; }
+}
+
+class Rhino extends Animal {
+    constructor() { super("Rhino"); }
+}
+
+class Employee {
+    private name: string;
+    constructor(theName: string) { this.name = theName; }
+}
+
+let animal = new Animal("Goat");
+let rhino = new Rhino();
+let employee = new Employee("Bob");
+
+animal = rhino;
+animal = employee; // Error: 'Animal' and 'Employee' are not compatible
+```
+
+En este ejemplo, tenemos una Animaly una Rhino, con Rhinoser una subclase de Animal. También tenemos una nueva clase Employeeque se ve idéntica Animalen términos de forma. Creamos algunas instancias de estas clases y luego tratamos de asignarlas entre sí para ver qué sucederá. Porque Animaly Rhinocomparten el privatelado de su forma desde la misma declaración de private name: stringin Animal, son compatibles. Sin embargo, este no es el caso Employee. Cuando intentamos asignar de a Employeea Animal, obtenemos un error de que estos tipos no son compatibles. Aunque Employeetambién tiene un privatemiembro llamado name, no es el que declaramos enAnimal .
+
+### Compresión Protected
+
+El protectedmodificador actúa de manera muy similar al privatemodificador con la excepción de que los miembros declarados protectedtambién pueden accederse dentro de las clases derivadas. Por ejemplo:
+
+```ts
+class Person {
+    protected name: string;
+    constructor(name: string) { this.name = name; }
+}
+
+class Employee extends Person {
+    private department: string;
+
+    constructor(name: string, department: string) {
+        super(name);
+        this.department = department;
+    }
+
+    public getElevatorPitch() {
+        return`Hello, my name is ${this.name} and I work in ${this.department}.`;
+    }
+}
+
+let howard = new Employee("Howard", "Sales");
+console.log(howard.getElevatorPitch());
+console.log(howard.name); // error
+```
+
+Tenga en cuenta que si bien no podemos usarlo namedesde fuera Person, aún podemos usarlo desde un método de instancia de Employeeporque Employeederiva dePerson .
+
+Un constructor también puede estar marcado protected. Esto significa que la clase no se puede instanciar fuera de su clase que contiene, sino que se puede extender. Por ejemplo:
+
+```ts
+class Person {
+    protected name: string;
+    protected constructor(theName: string) { this.name = theName; }
+}
+
+// Employee can extend Person
+class Employee extends Person {
+    private department: string;
+
+    constructor(name: string, department: string) {
+        super(name);
+        this.department = department;
+    }
+
+    public getElevatorPitch() {
+        return`Hello, my name is ${this.name} and I work in ${this.department}.`;
+    }
+}
+
+let howard = new Employee("Howard", "Sales");
+let john = new Person("John"); // Error: The 'Person' constructor is protected
+```
+
+### Convertir Proyecto a Typescript
+
+Quick fix es algo que vas a poder usar si usas typescript y visual studio code, vsc ya trae un plugin que habilita todas estas funcionalidades de a gratis, esa es una buenas convinaciones en el desarrollo de js. vscode y typescript.
 
