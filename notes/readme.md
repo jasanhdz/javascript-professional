@@ -1,6 +1,14 @@
-# JavaScript Profesional
+<div align="center">
+  <h1>JavaScript Profesional</h1>
+</div>
 
-## Como llegá uin script al navegador
+## Tabla de Contenido
+- [¿Como llegá un script al navegador?](#como-llegá-un-script-al-navegador)
+- [Scope](#scope)
+- [Clouseres](#clouseres)
+- [¿Quién es This?](#quién-es-this)
+
+## ¿Como llegá un script al navegador?
 
 El **DOM** es la representación que hace el navegador de un documento HTML.
 
@@ -15,6 +23,10 @@ Tanto con async como defer podemos hacer llamados asíncronos pero tiene sus dif
 - scripts embebidos: el navgador carga linea a linea el html y cuando se encuentra un codigo entre scripts va a deter su ejecución hasta que hallá procesado todo el script.
 
 Hay que tener en cuenta que cuando carga una página y se encuentra un script a ejecutar toda la carga se detiene. Por eso se recomienda agregar tus scripts justo antes de cerrar el body para que todo el documento esté disponible.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Scope
 
@@ -33,6 +45,10 @@ Variables definidas dentro de un bloque, por ejemplo variables declaradas dentro
 Cuando se denota un script de tipo module con el atributo type="module las variables son limitadas al archivo en el que están declaradas.
 
 Esto va a declarar que esté archivo es un modulo, estó no estan en todos los navegadores pero si en los más modernos. Los valores que teníamos escritos ahora no los vamos a poder leer en consola porque el module scope está limitando el alcance 
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Clouseres
 
@@ -98,7 +114,12 @@ console.log('This count is:', counter.decrease());
 // ERROR FATAL
 counter.count = 99;
 ```
-## This
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## ¿Quién es This?
 
 This se refiere a un objeto. Ese objeto es el que actualmente está ejecutando un pedazó de código.
 
@@ -187,6 +208,10 @@ En el contexto de objetos que fueron instanciados de una clase, **this** se va a
 
 Y cuando asignamos los valores de ``this.name = name`` lo estamos haciendo sobre la instancia, no sobre el objeto prototipal.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## Métodos Call y Apply.
 
 This no es un valor que podemos asignar directamente, no podemos escribir this = 'valor', pero si existen unos métodos que son parte del prototipo de function *call, apply, bind*. Estos 3 métodos nos van ha ayudar a establecer cual es el this que va ha ser el contexto de la llamada a una función .
@@ -246,10 +271,18 @@ caminar.apply(richard, valores)
 ```
 Es lo mismo pero nos podemos enfrentar donde hay situaciones donde es más fácil usar el call y hay lugares donde es más fácil usar el apply. Sobre todo si son valores que son una lista de valores.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ### Evitar confundir Apply y Call
 
 Call = Commas
 Apply = Areglo
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Bind
 
@@ -303,6 +336,10 @@ danielCamina('SurOeste');
 
 Está técnica se llama kurin donde guardamos parcialmente algunos argumentos y luego llenamos los demás, es una ténica funcional que es muy poderosa y que te va a permitir hacer funciones reutilizables, para contextos donde solo parcialmente esta establecido un valor.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## Diferencias Apply, Call, y Bind
 
 Call y Apply van a establecer el this y va a llamar la función inmediatamente, bind va a crear una nueva función donde this estará guardado y luego tocará guardar y ejecutar esa nueva función.
@@ -347,6 +384,10 @@ Array.prototype.forEach.call(buttons, button => {
   button.onclick = () => alert('Nunca pares de aprender');
 })
 ```
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Prototype
 
@@ -423,6 +464,10 @@ zelda.saludar();
 const link = Hero("Link");
 link.saludar();
 ```
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Object create
 
@@ -529,6 +574,10 @@ Lo que acabamos de hacer es: tienes un objeto simple donde nos las inventamos pa
 
 Hoy en dia hay nuevas formas de hacerlo, usando el keyword class internamente, definimos los métodos, definimos un constructor, todo estó es tambipen sugar-sintaxs que vale la pena y es muy importante entender como funciona nativamente para ver como es que nuestro lenguaje se está comportando.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## Herencia Prototipal
 
 Por default los objetos en JavaScript tienen cómo prototipo a Object que es el punto de partida de todos los objetos, es el prototipo padre. Object es la raíz de todo, por lo tanto tiene un prototipo padre undefined.
@@ -593,6 +642,10 @@ Lo que hace el lenguaje para encontrarlo es preguntar:
 
 **Object** es el punto de partida de todos los objetos en javascript esto incluye las funciones que también son objetos en javascript
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## ¿Como funciona Javascript?
 
 ¿Qué pasa cuando llega un script al navegador?
@@ -615,16 +668,24 @@ Google una compañía con productos sumamente complejos como google maps, necesi
 Mirando un grafo con este orden usando V8.
 
 <div align="center">
-  <img src="assets/v8.jpg"> 
+  <img src="../assets/v8.jpg"> 
 </div>
 
 **Javascript source code** pasa por el **parset** donde obtenesmos el AST, despues el **AST** se lo damos al **interpretador** que va a producir **bytecode** ahí es donde comienza a ejecutarse nuestro programa, bytecode es un lenguaje menor nivel pero va a permitir que se ejecute más rápido, **mientras se va ejecutando** hay un proceso que se llama el **profiling data** que va a estar analizando la ejecución va a encontrar los puntos donde el programa se puede optimizar y eventualemente va a producir el machine code, esto hace el *optimizing compiler** el **compilador de optimizaciones** y despues tenemos el **Optimized code**.
 
 Hay veces en que estas asunciones fallan ahí deoptimize(deoptimizamos) el código.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ### Analizador y Abstract Syntax Tree
 
 **Parser:** un parser va a tomar tu código fuente y lo va a leer, pero lo que tu estas escribiendo no es la que la computadora entiende así tal cual como lo escribiste, primero lo tiene que descomponer y esa descomposicion o esos pedazos que van a salir se llamán **tokens**. Tokens identifican que let es una palabra clave o new es una palabra clave, que el simbolo de + es un operador y que lo que está aun lado y al otro o quizas son número u otro tipo de variable y una vez que tenemos esos tokens es cuando vamos a hacer el AST(Abstract Syntax Tree).
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 #### Fallo en el Parset
 
@@ -642,9 +703,11 @@ El proceso de parsing es muy importante que se haga bien.
 
 La tercer parte significa que el código lo tenemos que empaquetar de una forma eficiente donde hay unos archivos de código separados lógicamente y que solamente vamos a cargar cuando sea necesario, esta es una modalidad que se esta volviendo muy frecuentemente de una solo página **Single Pages Apps**.
 
-#### Parser de V8
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
-##### Eager Parsing:
+#### Eager Parsing (Parser de V8):
 
 Cuando sea hace este parsing vamos a encontrar todos los errores de sintaxis en el código que se esta analizando y vamos a crear el AST. Que siemplemente es un árbol o arquitectura en forma de árbol que representa tu programa, y además va ha construir los scopes. En este momento vamos a saber que variables se pueden leer en que partes del código 
 
@@ -652,13 +715,21 @@ Cuando sea hace este parsing vamos a encontrar todos los errores de sintaxis en 
 - Crea el AST
 - Construye Scopes
 
-##### Lazy Parsing
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+#### Lazy Parsing
 
 Cuando hacemos esto parsing estamos retrazando alguna parte del código porque no hace falta analizarla y puede esperar, esto tiene una ventaja y es que es el doble de rápido por lo tanto si las cosas tardaban 20% si logramos que ocurra mucho lazy parsing podemos retrazar ese analisis, una consecuencia es que el AST no se construye  y los Scopes se construyen parcialmente.
 
 - Doble de rápido que el eager parser
 - No crea el AST
 - Construye los scopes parcialmente.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 #### Tokens
 
@@ -696,6 +767,10 @@ var answer = "hola";
 ]
 ```
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 #### Abstract Syntax Tree
 
 El AST es un gráfo (estructura en forma de árbol). Donde vamos a tener una raíz que será nuestro programa y lo vamos a ir descomponiendo en partes, todo esto lo vamos a poder hacer siguiendo los tokens que produce el parser, esto se usa en muchisimos sitios, no solo para ejecutar un programa javascript, tembién lo usamos para transformar código de una forma a otra que es como lo que hace **babel** o **priged** 
@@ -714,11 +789,15 @@ Demo de AST
 let foo = "bar";
 ```
 
-<div align="cente">
-  <img src="assets/demoast.jpg" alt="demo AST">
+<div align="center">
+  <img src="../assets/demoast.jpg" alt="demo AST">
 </div>
 
 También puede construir tu propio ejemplo en [AST Explorer](https://astexplorer.net/)
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Abstract Syntax Tree en Práctica
 
@@ -764,6 +843,11 @@ export default function(context) {
   };
 };
 ```
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## Como funciona el Javascript Engine
 
 Despues de que el parser hizo su trabajo y nos dio el AST continua el interpretador, el compilador para obtener código optimizado. 
@@ -774,6 +858,10 @@ Despues de que el parser hizo su trabajo y nos dio el AST continua el interpreta
 - Se optimiza a machine code y se remplaza el código base.
 
 Cuando el bytecode se está ejecutando hay un observador, un programa que observa el bytecode y va a estar tomando notas, cuando tiene suficientes notas es capaz de tomar decisiones para optimizar tu código y así obtener código optimizado, si alguna de estas observaciones en el futuro resulta ser falsa y que todavía no se cumple, no pasa nada, tu código va a regresar a una versión ya optmizada donde va a seguir corriendo aunque no tan rápido.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Bytecode vs Machine Code
 
@@ -800,12 +888,20 @@ Que pasa si por la razón que sea, ya no estamos pasando 2 números como argumen
 
 Los motores de Javascript funcionan ligeramente diferente, cada browser tiene su propia implementación aunque todos siguen una estructura parecida, el que acabamos de analizar fue V8.
 
-#### SpiderMonkey vs V8
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### SpiderMonkey vs V8
 
 SpiderMonkey tiene 2 capas de optimización, Chakra también y recibe información de profiler y de varios lugares. **JavascriptCore tiene 3 capas de optimización**. 
 ¿Esto significa que safari es más rápido que chrome? No necesariamente, en el desarrollo de programas o de ingeniería siempre se trata traetors, intercambio de costos beneficios, esto quizas no sea perfecto, pero luego saldra mejor, y en javascriptCore puede ser que nuestro programa tarde un poquito más en comenzar, pero una vez que se inicialice el profiler comienza a actuar, optimiza poco y luego otro poco, asi sucesivamente.
 
 Mientras que en chrome nuestro programa empieza a ejecutarse rápido y quizas toma un poco más de tiempo en que se optmize pero así es como funcionan los motores de javascript.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Event Loop
 
@@ -814,7 +910,7 @@ Si lo tuvieramos que describir en una oración: El eventLoop es lo que hace que 
 Tenemos que saber que Javascript se organiza usando 2 estructuras de datos, es el Stack y el Heap.
 
 <div align="center">
-<img src="assets/stackheap.png" alt="memorystructuresjs">
+<img src="../assets/stackheap.png" alt="memorystructuresjs">
 </div>
 
 El stack es una estructura de datos que lleva rastro de donde está el programa, si un programa comienza con una función main, a su vez llama a renderList y renderList llamá a getMovies, es Stack se vería algo así.
@@ -826,13 +922,13 @@ El stack comenzará vacío, pero vamos a hacer una operación que se llama un pu
 Esa operación de sacar se llama pop, si hacemos pop sale getMovies, si volvemos a hacer pop sale renderList, y si volvemos a hacer pop sale mainy el obtenemos el stack vacío.
 
 <div align="center">
-  <img src="assets/stack.png" alt="stack">
+  <img src="../assets/stack.png" alt="stack">
 </div>
 
 El stack es donde están nuestras funciones, es el registro de como esta operando nuestro programa, apunta a variables como el scope.
 
 <div align="center">
-  <img src="assets/scope.png" alt="stack">
+  <img src="../assets/scope.png" alt="stack">
 </div>
 
 Es donde dice estas cosas en está función tienen acceso al entorno global, esto tiene acceso al scope de la función, esto tiene acceso al scope de un bloque y nos guarda esa información.
@@ -840,10 +936,10 @@ Es donde dice estas cosas en está función tienen acceso al entorno global, est
 Entonces si tenemos un programa como este:
 
 <div align="center">
-  <img src="assets/stackstart.png" alt="stackstart">
-  <img src="assets/stackmain.png" alt="stackmain">
-  <img src="assets/stackhello.png" alt="stackhello">
-  <img src="assets/stackconsole.png" alt="stackconsole">
+  <img src="../assets/stackstart.png" alt="stackstart">
+  <img src="../assets/stackmain.png" alt="stackmain">
+  <img src="../assets/stackhello.png" alt="stackhello">
+  <img src="../assets/stackconsole.png" alt="stackconsole">
 </div>
 
 Y así sucesivamente van agregando y quitando ejecuciones en el orden correspondiete.
@@ -853,18 +949,23 @@ Cuando se ejecuta una función asincrona, como por ejemplo un setTimeout, lo rec
 Parece raro pero esta es la asincronia, cosas que van a pasar eventualmente, pues eventualmente pasarán, pero aún no les toca.
 
 <div align="center">
-  <img src="assets/stackasyncrono.png" alt="stackasync">
-  <img src="assets/stackasyncronosettimeout.png" alt="stackasynctimeout">
-  <img src="assets/stackasyncronoconsole.png" alt="stackasyncconsole">
-  <img src="assets/stackasyncronofin.png" alt="stackasyncfin">
-  <img src="assets/stackasyncronoclean.png" alt="stackasyncclean">
-  <img src="assets/stacksettimeout.png" alt="stacksettimeout">
-  <img src="assets/stackasyncronoclean.png" alt="stackasyncclean">
+  <img src="../assets/stackasyncrono.png" alt="stackasync">
+  <img src="../assets/stackasyncronosettimeout.png" alt="stackasynctimeout">
+  <img src="../assets/stackasyncronoconsole.png" alt="stackasyncconsole">
+  <img src="../assets/stackasyncronofin.png" alt="stackasyncfin">
+  <img src="../assets/stackasyncronoclean.png" alt="stackasyncclean">
+  <img src="../assets/stacksettimeout.png" alt="stacksettimeout">
+  <img src="../assets/stackasyncronoclean.png" alt="stackasyncclean">
+</div>
+<br>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
 ## Task Queue
 
-¿Como funciona estó?
+**¿Como funciona estó?**
 
 Para poder entenderlo tenemos que hablar sobre **Queue**: es una estructura de datos igual que el stack donde si el stack las cosas, lo primero que entra es lo último que sale. En el **Queue lo primero que entra es lo primero que sale**, es como ir al banco y hacemos una fila, el que llegó primero es al que van a antender primero 
 
@@ -873,18 +974,23 @@ Teniendo en cuenta esto vamos a hablar sobre la cola de tareas.
 Cuando teniamos el setTimeout encolamos una tarea que ibamos a hacer en 1000 milisegundos.
 
 <div align="center">
-  <img src="assets/eventloop.png" alt="eventloop">
-  <img src="assets/eventloopstack.png" alt="eventloopstack">
+  <img src="../assets/eventloop.png" alt="eventloop">
+  <img src="../assets/eventloopstack.png" alt="eventloopstack">
 </div>
 
 ¿Qué pasa si el stack no está vacío?
 
 <div align="center">
-  <img src="assets/eventloopstackloadtwo.png" alt="eventloopstackloadtwo">
-  <img src="assets/eventloopstackloadtwotask.png" alt="eventloopstackloadtwotask">
-  <img src="assets/eventloopstackloadtwotaskall.png" alt="eventloopstackloadtwotaskall">
-  <img src="assets/eventloopstackiii.png" alt="eventloopstackiii">
-  <img src="assets/eventloopstackfintwo.png" alt="eventloopstackfintwo">
+  <img src="../assets/eventloopstackloadtwo.png" alt="eventloopstackloadtwo">
+  <img src="../assets/eventloopstackloadtwotask.png" alt="eventloopstackloadtwotask">
+  <img src="../assets/eventloopstackloadtwotaskall.png" alt="eventloopstackloadtwotaskall">
+  <img src="../assets/eventloopstackiii.png" alt="eventloopstackiii">
+  <img src="../assets/eventloopstackfintwo.png" alt="eventloopstackfintwo">
+</div>
+<br>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
 ## Event Loop con Promesas
@@ -892,17 +998,22 @@ Cuando teniamos el setTimeout encolamos una tarea que ibamos a hacer en 1000 mil
 Las promesas son algo que eventualmente va a pasar, se puede resolver una promesa o se puede rechazar pero lo importante es que eventualmente, esto es asincrono, entonces llevamos este programa de nombre moreAsync.
 
 <div align="center">
-  <img src="assets/promiseeventloop.png" alt="promiseeventloop">
+  <img src="../assets/promiseeventloop.png" alt="promiseeventloop">
 </div>
 
 Resulta que las promesas van en otra cola, la cola de microtareas **Microtask Queue**. Las microtareas son de mayor preoridad y seimpre van primero sobre el scheduled task.
 
 <div align="center">
-  <img src="assets/microtask.png" alt="microtask">
-  <img src="assets/microtaskespera.png" alt="microtaskespera">
-  <img src="assets/microtaskpromise.png" alt="microtaskpromise">
-  <img src="assets/microtaskpromise2.png" alt="microtaskpromise2">
-  <img src="assets/microtaskpromisefin.png" alt="microtaskpromisefin">
+  <img src="../assets/microtask.png" alt="microtask">
+  <img src="../assets/microtaskespera.png" alt="microtaskespera">
+  <img src="../assets/microtaskpromise.png" alt="microtaskpromise">
+  <img src="../assets/microtaskpromise2.png" alt="microtaskpromise2">
+  <img src="../assets/microtaskpromisefin.png" alt="microtaskpromisefin">
+</div>
+<br>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
 ## Promesas
@@ -933,6 +1044,11 @@ Ya vimos como el event loop procesa las promesas, ahora vamos a volver a las pro
         })
       }
 ```
+<br>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Getters y Setters
 
@@ -958,6 +1074,11 @@ persona.nombreCompleto = 'Camilo Sanchez'
 console.log(persona.nombre); //camilo
 console.log(persona.apellido); //sanchez
 ```
+<br>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Proxy
 
@@ -1100,9 +1221,13 @@ function* fibonacci() {
 
 Los generadores son funciones especiales cuya ejecución podemos comenzar y detener a mitad de vuelo y cuando queramos continuarla podemos llamar a next, podemos pasarle un valor al generador si hace falta y su ejecución va a continuar siempre recordanse del scope en el que estaba.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## Como cancelar peticiones Fetch
 
-La peticiones AJAX permitieron en su tiempo hacer peticiones asíncronas al servidor sin tener que detener la carga de la página. Hoy en día se utiliza la función fetch para esto.
+La peticiones [AJAX]() permitieron en su tiempo hacer peticiones asíncronas al servidor sin tener que detener la carga de la página. Hoy en día se utiliza la función fetch para esto.
 
 Con fetch tenemos algo llamado AbortController que nos permite enviar una señal a una petición en plena ejecución para detenerla.
 
@@ -1184,6 +1309,11 @@ const url =
       };
       
 ```
+<br>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Intersection Observer API
 
@@ -1195,6 +1325,10 @@ Lazy-loading de imágenes u otro contenido a medida que la página se desplaza.
 Implementación de “scroll infinito” de sitios web, donde más y más contenido se carga y muestra a medida que usted hace scroll, de forma que el usuario no tiene que pasar páginas.
 Informes de visualizaciones de anuncios para calcular ingresos por publicidad.
 Decidir si deben realizarse tareas o procesos de animación basados en si el usuario verá o no el resultado.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Creando un Intersection Observer
 
@@ -1212,6 +1346,10 @@ var observer = new IntersectionObserver(callback, options);
 
 Un threshold de 1.0 significa que cuando el 100% del elemento target está visible dentro del elemento especificado por la opción root, la función callback es invocada.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ### Opciones de Intersection observer
 
 El objeto options pasado al constructor [IntersectionObserver()](https://developer.mozilla.org/es/docs/Web/API/IntersectionObserver/IntersectionObserver) le deja controlar las circunstancias bajo las cuales la función callback del observer es invocada. Tiene los siguientes campos:
@@ -1227,6 +1365,10 @@ Margen alrededor del elemeto root. Puede tener valores similares a los de CSS [m
 threshold
 
 Es un número o un array de números que indican a que porcentaje de visibilidad del elemento target, la función callback del observer debería ser ejecutada. Si usted quiere que se detecte cuando la visibilidad pasa la marca del 50%, debería usar un valor de 0.5. Si quiere ejecutar la función callback cada vez que la visibilidad pase otro 25%, usted debería especificar el array [0, 0.25, 0.5, 0.75, 1]. El valor por defecto es 0 (lo que significa que tan pronto como un píxel sea visible, la función callback será ejecutada). Un valor de 1.0 significa que el umbral no se considera pasado hasta que todos los pixels son visibles.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Determinando un elemento para ser observado
 
@@ -1258,6 +1400,10 @@ var callback = function(entries, observer) {
 Asegúrese de que su función callback se ejecute sobre el hilo principal. Debería operar tan rápidamente como sea posible; si alguna cosa necesita tiempo extra para ser realizada, use [Window.requestIdleCallback()](https://developer.mozilla.org/es/docs/Web/API/Window/requestIdleCallback).
 
 También, note que si especifica la opción root, el elemento target debe ser un descendiente del elemento root.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Creación de Plugin para IntersectionObserver de nuestro videoplayer
 
@@ -1294,6 +1440,10 @@ class AutoPause {
 }
 export default AutoPause;
 ```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Visibility Change
 
@@ -1333,12 +1483,15 @@ run(player) {
 
 El evento visibilityChange es un evento muy simple pero muy util, nos deja saber si el tab es el que esta hasta el frente, el tab que el usuario esta viendo, si cambiamos de tab nos permite cambiar acción, no solo nos permite ver un video, también pudiera ser cambiar el titulo de la pestaña, y asi decirle al dom que haga otras acciones, que pueden ahorrar bateria o mejorar el rendimiento de nuestras aplicaciones.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Service worker
 
 Una de las nuevas tendencias en el desarrollo web, son las pwa o _progressive web apps_, dentro de las varias cosas que ofrecen está que tu app funcione offline, esto lo hacemos posible usando los services workers, **services workers es una capa que va a vivir entre el navegador y el internet**. Lo que van a hacer es algo parecido a los proxys, van a interceptar peticiones, en esté caso las peticiones vamos a tener la oportunidad de hagarrar la petición, buscar la respuesta pero antes de regresarla al browser la vamos a guardar en cache 
 
-¿Qué pasa una vez que lo tenemos en cache?
+**¿Qué pasa una vez que lo tenemos en cache?**
 
 La proxima vez que ocurra una petición, en lugar de tener que ir a internet, ya tenemos la respuesta, así que nadamas la regresamos, imaginate un usuario que va dentro del metro se mete en un tunel y pierde conectividad, va a seguir utilizando tu aplicación porque usando service workers, va a funcionar offline.
 
@@ -1433,6 +1586,10 @@ async function updateCache(request) {
   return cache.put(request, response)
 }
 ```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Typescript
 
@@ -1456,6 +1613,10 @@ Agregamos un par de configuraciones a nuestro packages.json
 TypeScript es un lenguaje de programación libre y de **código abierto** desarrollado y mantenido por **Microsoft**. Es un superconjunto de JavaScript, que esencialmente añade tipos estáticos y objetos basados en clases. [Anders Hejlsberg](https://es.wikipedia.org/wiki/Anders_Hejlsberg), diseñador de C# y creador de Delphi y Turbo Pascal, ha trabajado en el desarrollo de TypeScript.1​ TypeScript puede ser usado para desarrollar aplicaciones JavaScript que se ejecutarán en el lado del cliente o del servidor (**Node.js**).
 
 TypeScript extiende la sintaxis de JavaScript, por tanto cualquier código JavaScript existente debería funcionar sin problemas. Está pensado para grandes proyectos, los cuales a través de un compilador de TypeScript se traducen a código JavaScript original.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Tipos básicos en Typescript
 
@@ -1509,6 +1670,10 @@ comodin = { type: "WildCard" }
 // Object 
 let someObject: object = { type: "WildCard" };
 ```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Funciones en Typescript
 
@@ -1542,6 +1707,10 @@ function fullValue(firtsName: string = "Pepe", lastName: string = "Smith"): stri
 }
 const person = fullValue();
 ```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Interfaces en Typescript
 
@@ -1579,7 +1748,11 @@ console.log(rect.toString());
 
 Las interfaces definen la forma exacta que debe tener un objeto, no podemos añadir propiedades de más, ni de menos, en caso de que una propiedad sea opcional, la tenemos que marcar como opcional
 
-## Clases en typescript
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## Clases en Typescript
 
 JavaScript tradicional utiliza funciones y herencia basada en prototipos para construir componentes reutilizables, pero esto puede resultar un poco incómodo para los programadores más cómodos con un enfoque orientado a objetos, donde las clases heredan la funcionalidad y los objetos se crean a partir de estas clases. A partir de ECMAScript 2015, también conocido como ECMAScript 6, los programadores de JavaScript podrán construir sus aplicaciones utilizando este enfoque basado en clases orientado a objetos. En TypeScript, permitimos que los desarrolladores usen estas técnicas ahora y las compilen en JavaScript que funcione en todos los principales navegadores y plataformas, sin tener que esperar a la próxima versión de JavaScript.
 
@@ -1605,7 +1778,11 @@ Notarás que en la clase cuando nos referimos a uno de los miembros de la clase 
 
 En la última línea construimos una instancia de la Greeterclase usando new. Esto llama al constructor que definimos anteriormente, creando un nuevo objeto con la Greeterforma y ejecutando el constructor para inicializarlo.
 
-### Herencia typescript
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Herencia Typescript
 
 En TypeScript, podemos usar patrones comunes orientados a objetos. Uno de los patrones más fundamentales en la programación basada en clases es poder extender las clases existentes para crear otras nuevas usando la herencia.
 
@@ -1632,7 +1809,15 @@ Este ejemplo muestra la característica de herencia más básica: las clases her
 
 Debido a que Dogextiende la funcionalidad desde Animal, pudimos crear una instancia de Dogque podría ambos bark()y move().
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## Modificadores públicos, privados y protegidos en Typescript
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Público por defecto
 
@@ -1649,6 +1834,10 @@ class Animal {
     }
 }
 ```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Comprensión private
 Cuando se marca un miembro private, no se puede acceder desde fuera de su clase que lo contiene. Por ejemplo:
@@ -1691,6 +1880,10 @@ animal = employee; // Error: 'Animal' and 'Employee' are not compatible
 ```
 
 En este ejemplo, tenemos una Animaly una Rhino, con Rhinoser una subclase de Animal. También tenemos una nueva clase Employeeque se ve idéntica Animalen términos de forma. Creamos algunas instancias de estas clases y luego tratamos de asignarlas entre sí para ver qué sucederá. Porque Animaly Rhinocomparten el privatelado de su forma desde la misma declaración de private name: stringin Animal, son compatibles. Sin embargo, este no es el caso Employee. Cuando intentamos asignar de a Employeea Animal, obtenemos un error de que estos tipos no son compatibles. Aunque Employeetambién tiene un privatemiembro llamado name, no es el que declaramos enAnimal .
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Compresión Protected
 
@@ -1747,16 +1940,28 @@ class Employee extends Person {
 let howard = new Employee("Howard", "Sales");
 let john = new Person("John"); // Error: The 'Person' constructor is protected
 ```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
-### Convertir Proyecto a Typescript
+## Convertir Proyecto a Typescript
 
 Quick fix es algo que vas a poder usar si usas typescript y visual studio code, vsc ya trae un plugin que habilita todas estas funcionalidades de a gratis, esa es una buenas convinaciones en el desarrollo de js. vscode y typescript.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Refactorización
 
 La [refactorización del código fuente](https://en.wikipedia.org/wiki/Code_refactoring) puede mejorar la calidad y la facilidad de mantenimiento de su proyecto al reestructurar su código sin modificar el comportamiento del tiempo de ejecución. Visual Studio Code admite operaciones de refactorización (refactorizaciones) como el Método deextracción y la [Variable de extracción](https://refactoring.com/catalog/extractVariable.html) para mejorar su base de código desde su editor.
 
 **La refactorización de código** es el proceso de reestructurar el código de computadora existente, cambiar la [factorización](https://en.wikipedia.org/wiki/Decomposition_(computer_science)), sin cambiar su comportamiento externo. La refactorización está destinada a mejorar los atributos [no funcionales](https://en.wikipedia.org/wiki/Non-functional_requirement) del [software](https://en.wikipedia.org/wiki/Software) . Las ventajas incluyen [legibilidad](https://en.wikipedia.org/wiki/Readability) mejorada del código y [complejidad] reducida ; Estos pueden mejorar el [mantenimiento del código fuente](https://en.wikipedia.org/wiki/Maintainability) y crear una [arquitectura] interna más expresiva o [un modelo de objeto] para mejorar la [extensibilidad](https://en.wikipedia.org/wiki/Extensibility).
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Patrones de diseño
 
@@ -1766,6 +1971,10 @@ Un patrón de diseño resulta ser una solución a un problema de diseño. Para q
 
 **Sumary**:
 Los patrones de diseño son como recetas que resuelven problemas que nos enfrentamos frecuentemente en el diseño de software, en especifico, son una solución de un problema dentro de un contexto, y esté contexto no se vale que ocurra una sola vez, tiene que pasar muchas veces. Porque si ocurriera una sola vez, fuera una solución pero no lo podemos categorizar como un patrón de diseño, los patrones de diseño van a resolver problemas dentro de un contexto recurrente.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Objetivos de los patrones de diseño
 
@@ -1784,6 +1993,10 @@ Asimismo, no pretenden:
 
 No es obligatorio utilizar los patrones, solo es aconsejable en el caso de tener el mismo problema o similar que soluciona el patrón, siempre teniendo en cuenta que en un caso particular puede no ser aplicable. "Abusar o forzar el uso de los patrones puede ser un error".
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ### Historia sobre Patrones de diseño
 
 No los inventaron los ingenieros de software, programadores o desarrolladores, los patrones de diseño vienen de la arquitectura de estos 2 libros: [The timeless way of building](https://en.wikipedia.org/wiki/The_Timeless_Way_of_Building) y [A Pattern Language](https://en.wikipedia.org/wiki/A_Pattern_Language) escritos por [Christopher Alexander](https://en.wikipedia.org/wiki/Christopher_Alexander). 
@@ -1795,10 +2008,18 @@ De aquí 4 personas que conocemos como el  Gang of Four (GoF) o Ganga de cuatro 
 
 Es de  aquí que el sofware comienza a tomar estás ideas, es un libro de los 90s pero su importancia y validez aún se mantiene. 
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ### Beneficios de utilizar patrones de diseño
 
 - Son una caja bien probadas a problemas comunes en diseño de software.
 - Te proveen un lenguaje común que te permiten comunicarte de una forma especifica y eficiente.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ### Desventajas de utilizar patrones de diseño
 
@@ -1814,6 +2035,10 @@ Recuerda no siempre estar pensando en patrones de diseño deja que naturalmente 
 
 saber más [codigohorror](https://blog.codinghorror.com/head-first-design-patterns/)
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## Categorias de patrones de diseño
 
 El libro design patterns de GoF definio la lita inicial de patrones de diseño de software, los dividio en 3 categorias:
@@ -1821,6 +2046,10 @@ El libro design patterns de GoF definio la lita inicial de patrones de diseño d
 - Patrones creacionales
 - Patrones estructurales
 - Patrones de comportamiento
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Patrones Creacionales
 
@@ -1891,13 +2120,11 @@ public sealed class Singleton
 }
 ```
 
-Ejemplo en JavaScript con TypeScript:
-
-```ts
-
-```
-
 [Model View Controller](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador) (MVC) ♙En español: Modelo Vista Controlador. Es un patrón de arquitectura de software que separa los datos y la lógica de negocio de una aplicación de la interfaz de usuario y el módulo encargado de gestionar los eventos y las comunicaciones. Este patrón plantea la separación del problema en tres capas: la capa model, que representa la realidad; la capa controller , que conoce los métodos y atributos del modelo, recibe y realiza lo que el usuario quiere hacer; y la capa vista, que muestra un aspecto del modelo y es utilizada por la capa anterior para interactuar con el usuario.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Patrones estrucuturales
 
@@ -1912,22 +2139,426 @@ Describen formas de componer  objetos para formar nuevas estructuras flexibles y
 - [Proxy](https://es.wikipedia.org/wiki/Proxy_(patr%C3%B3n_de_dise%C3%B1o)): Proporciona un intermediario de un objeto para controlar su acceso.
 - [Module](https://es.wikipedia.org/wiki/M%C3%B3dulo_(patr%C3%B3n_de_dise%C3%B1o)): Agrupa varios elementos relacionados, como clases, singletons, y métodos, utilizados globalmente, en una entidad única.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
 ## Patrones de comportamiento
 
 Gestionan algoritmos y responsabilidades. Estos patrones lo que ofrecen son formas de poder manejar diferentes algoritmos, funcionalidades que pueden llegar a tener tus objetos o las relaciones entre ellos.
 
 Se definen como patrones de diseño software que ofrecen soluciones respecto a la interacción y responsabilidades entre clases y objetos, así como los algoritmos que encapsulan:
 
-[Chain of Responsibility]() (Cadena de responsabilidad): Permite establecer la línea que deben llevar los mensajes para que los objetos realicen la tarea indicada.
-[Command]() (Orden): Encapsula una operación en un objeto, permitiendo ejecutar dicha operación sin necesidad de conocer el contenido de la misma.
-[Interpreter]() (Intérprete): Dado un lenguaje, define una gramática para dicho lenguaje, así como las herramientas necesarias para interpretarlo.
-[Iterator]() (Iterador): Permite realizar recorridos sobre objetos compuestos independientemente de la implementación de estos.
-[Mediator]() (Mediador): Define un objeto que coordine la comunicación entre objetos de distintas clases, pero que funcionan como un conjunto.
-[Memento]() (Recuerdo): Permite volver a estados anteriores del sistema.
-[Observer]() (Observador): Define una dependencia de uno-a-muchos entre objetos, de forma que cuando un objeto cambie de estado se notifique y actualicen automáticamente todos los objetos que dependen de él.
-[State]() (Estado): Permite que un objeto modifique su comportamiento cada vez que cambie su estado interno.
-[Strategy]() (Estrategia): Permite disponer de varios métodos para resolver un problema y elegir cuál utilizar en tiempo de ejecución.
-[Template Method]() (Método plantilla): Define en una operación el esqueleto de un algoritmo, delegando en las subclases algunos de sus pasos, esto permite que las subclases redefinan ciertos pasos de un algoritmo sin cambiar su estructura.
-[Visitor]() (Visitante): Permite definir nuevas operaciones sobre una jerarquía de clases sin modificar las clases sobre las que opera.
+[Chain of Responsibility](https://es.wikipedia.org/wiki/Cadena_de_responsabilidad) (Cadena de responsabilidad): Permite establecer la línea que deben llevar los mensajes para que los objetos realicen la tarea indicada.
+[Command](https://es.wikipedia.org/wiki/Command_(patr%C3%B3n_de_dise%C3%B1o)) (Orden): Encapsula una operación en un objeto, permitiendo ejecutar dicha operación sin necesidad de conocer el contenido de la misma.
+[Interpreter](https://es.wikipedia.org/wiki/Interpreter_(patr%C3%B3n_de_dise%C3%B1o)) (Intérprete): Dado un lenguaje, define una gramática para dicho lenguaje, así como las herramientas necesarias para interpretarlo.
+[Iterator](https://es.wikipedia.org/wiki/Iterador_(patr%C3%B3n_de_dise%C3%B1o)) (Iterador): Permite realizar recorridos sobre objetos compuestos independientemente de la implementación de estos.
+[Mediator](https://es.wikipedia.org/wiki/Mediator_(patr%C3%B3n_de_dise%C3%B1o)) (Mediador): Define un objeto que coordine la comunicación entre objetos de distintas clases, pero que funcionan como un conjunto.
+[Memento](https://es.wikipedia.org/wiki/Memento_(patr%C3%B3n_de_dise%C3%B1o)) (Recuerdo): Permite volver a estados anteriores del sistema.
+[Observer](https://es.wikipedia.org/wiki/Observer_(patr%C3%B3n_de_dise%C3%B1o)) (Observador): Define una dependencia de uno-a-muchos entre objetos, de forma que cuando un objeto cambie de estado se notifique y actualicen automáticamente todos los objetos que dependen de él.
+[State](https://es.wikipedia.org/wiki/State_(patr%C3%B3n_de_dise%C3%B1o)) (Estado): Permite que un objeto modifique su comportamiento cada vez que cambie su estado interno.
+[Strategy](https://es.wikipedia.org/wiki/Strategy_(patr%C3%B3n_de_dise%C3%B1o)) (Estrategia): Permite disponer de varios métodos para resolver un problema y elegir cuál utilizar en tiempo de ejecución.
+[Template Method](https://es.wikipedia.org/wiki/Patr%C3%B3n_de_m%C3%A9todo_de_la_plantilla) (Método plantilla): Define en una operación el esqueleto de un algoritmo, delegando en las subclases algunos de sus pasos, esto permite que las subclases redefinan ciertos pasos de un algoritmo sin cambiar su estructura.
+[Visitor](https://es.wikipedia.org/wiki/Visitor_(patr%C3%B3n_de_dise%C3%B1o)) (Visitante): Permite definir nuevas operaciones sobre una jerarquía de clases sin modificar las clases sobre las que opera.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
+## Patrón Singleton y casos de uso
+
+Singleton es un patron creacional, el singleton te va ayudar a que una clase solo sea capaz de crear una sola instancia de si misma, esa instancia siempre va a ser la misma, para describir patrones de diseño, siempre usamos una notación que se llamá UML.
+
+Diagrama UML de una clase que implementa el patrón singleton.
+
+<div align="center">
+  <img src="../assets/umlsingleton.png" alt="singleton uml">
+</div>
+
+En ingeniería de software, singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto.
+
+Su intención consiste en garantizar que una clase solo tenga una instancia y proporcionar un punto de acceso global a ella.
+
+El patrón singleton se implementa creando en nuestra clase un método que crea una instancia del objeto solo si todavía no existe alguna. Para asegurar que la clase no puede ser instanciada nuevamente se regula el alcance del constructor (con modificadores de acceso como protegido o privado).
+
+El patrón singleton se implementa creando en nuestra clase un método que crea una instancia del objeto solo si todavía no existe alguna. Para asegurar que la clase no puede ser instanciada nuevamente se regula el alcance del constructor (con modificadores de acceso como protegido o privado).
+
+La instrumentación del patrón puede ser delicada en programas con múltiples hilos de ejecución. Si dos hilos de ejecución intentan crear la instancia al mismo tiempo y esta no existe todavía, solo uno de ellos debe lograr crear el objeto. La solución clásica para este problema es utilizar exclusión mutua en el método de creación de la clase que implementa el patrón.
+
+Las situaciones más habituales de aplicación de este patrón son aquellas en las que dicha clase controla el acceso a un recurso físico único (como puede ser el ratón o un archivo abierto en modo exclusivo) o cuando cierto tipo de datos debe estar disponible para todos los demás objetos de la aplicación.
+
+El patrón singleton provee una única instancia global gracias a que:
+
+La propia clase es responsable de crear la única instancia.
+Permite el acceso global a dicha instancia mediante un método de clase.
+Declara el constructor de clase como privado para que no sea instanciable directamente.
+Al estar internamente autoreferenciada, en lenguajes como Java, el recolector de basura no actúa.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## Implementación del patrón Singleton con Typescript
+
+Uno de los patrones de diseño de creación más populares es el patrón Singleton que restringe la creación de instancias de una clase a un objeto.
+
+En esta publicación, le mostraré cómo usar el patrón junto con TypeScript.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Es genial con Typescript
+
+La biblia de los patrones de diseño, a saber, el libro de Gang of Four (GoF), presenta la aplicación de patrones utilizando el lenguaje C ++, un lenguaje estáticamente tipado.
+
+TypeScript permite implementar el patrón Singleton gracias a las siguientes características:
+
+- soporte para modificadores de acceso (privado, protegido, público),
+- soporte para métodos estáticos,
+- siendo un lenguaje estáticamente escrito.
+
+```ts
+class Singleton {
+  private static instance: Singleton;
+  private constructor() {
+    // initialition
+  }
+
+  static getInstance() {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
+
+    return Singleton.instance;
+  }
+}
+
+export default Singleton;
+```
+Luego podemos crear instancias de Singleton que harán referencia al mismo objeto en memoria.
+
+```ts
+import Singleton from './Singleton';
+
+const a = Singleton.getInstance();
+const b = Singleton.getInstance();
+
+console.log("¿A es igual a B?", a === b);
+```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## Observer (patrón de diseño)
+
+Observador (en inglés:[ Observer](https://en.wikipedia.org/wiki/Observer_pattern)) es un [patrón de diseño](https://es.wikipedia.org/wiki/Patr%C3%B3n_de_dise%C3%B1o) de software que define una dependencia del tipo uno a muchos entre objetos, de manera que cuando uno de los objetos cambia su estado, notifica este cambio a todos los dependientes. Se trata de un patrón de comportamiento (existen de tres tipos: creación, estructurales y de comportamiento), por lo que está relacionado con algoritmos de funcionamiento y asignación de responsabilidades a [clases](https://es.wikipedia.org/wiki/Clase_(inform%C3%A1tica)) y [objetos](https://es.wikipedia.org/wiki/Objeto_(programaci%C3%B3n)).
+
+Los patrones de comportamiento describen no solamente estructuras de relación entre objetos o clases sino también esquemas de comunicación entre ellos y se pueden clasificar en función de que trabajen con clases (método plantilla) u objetos (cadena de responsabilidad, comando, iterador, recuerdo, observador, estado, estrategia, visitante).
+
+La variación de la encapsulación es la base de muchos patrones de comportamiento, por lo que cuando un aspecto de un programa cambia frecuentemente, estos patrones definen un objeto que encapsula dicho aspecto. Los patrones definen una clase abstracta que describe la encapsulación del objeto.
+
+Este patrón también se conoce como el patrón de publicación-inscripción o modelo-patrón. Estos nombres sugieren las ideas básicas del patrón, que son: el objeto de datos, que se le puede llamar Sujeto a partir de ahora, contiene atributos mediante los cuales cualquier objeto observador o vista se puede suscribir a él pasándole una referencia a sí mismo. El Sujeto mantiene así una lista de las referencias a sus observadores. Los observadores a su vez están obligados a implementar unos métodos determinados mediante los cuales el Sujeto es capaz de notificar a sus observadores suscritos los cambios que sufre para que todos ellos tengan la oportunidad de refrescar el contenido representado. De manera que cuando se produce un cambio en el Sujeto, ejecutado, por ejemplo, por alguno de los observadores, el objeto de datos puede recorrer la lista de observadores avisando a cada uno. Este patrón suele utilizarse en los [entornos de trabajo](https://es.wikipedia.org/wiki/Framework) de interfaces gráficas orientados a objetos, en los que la forma de capturar los eventos es suscribir listeners a los objetos que pueden disparar eventos.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Objetivo
+
+Definir una dependencia uno a muchos entre objetos, de tal forma que cuando el objeto cambie de estado, todos sus objetos dependientes sean notificados automáticamente. Se trata de desacoplar la clase de los objetos clientes del objeto, aumentando la modularidad del lenguaje, creando las mínimas dependencias y evitando bucles de actualización (espera activa o sondeo). En definitiva, normalmente, se usará el patrón observador cuando un elemento quiere estar pendiente de otro, sin tener que estar comprobando de forma continua si ha cambiado o no.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Motivación
+
+Si se necesita consistencia entre clases relacionadas, pero con independencia, es decir, con un bajo [acoplamiento](https://es.wikipedia.org/wiki/Acoplamiento_(inform%C3%A1tica)).
+
+<div align="center">
+  <img src="../assets/observer.png" alt="observer uml">
+</div>
+El patrón observador es la clave del patrón de arquitectura Modelo Vista Controlador (MVC).1​ De hecho el patrón fue implementado por primera vez en el MVC de Smalltalk basado en un entorno de trabajo de interfaz.2​ Este patrón está implementado en numerosos bibliotecas y sistemas, incluyendo todos los toolkits de GUI.
+
+Patrones relacionados: publicador-subscriptor, mediador, singleton.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Participantes
+
+Habrá sujetos concretos cuyos cambios pueden resultar interesantes a otros y observadores a los que al menos les interesa estar pendientes de un elemento y en un momento dado, reaccionar ante sus notificaciones de cambio. Todos los sujetos tienen en común que un conjunto de objetos quieren estar pendientes de ellos. Cualquier elemento que quiera ser observado tiene que permitir indicar:
+
+1. "Estoy interesado en tus cambios".
+1. "Ya no estoy interesado en tus cambios".
+
+El observable tiene que tener, además, un mecanismo de aviso a los interesados. A continuación se detallan a los participantes de forma desglosada:
+
+**Sujeto (subject):**
+El sujeto proporciona una interfaz para agregar (attach) y eliminar (detach) observadores. El Sujeto conoce a todos sus observadores.
+
+**Observador (observer):**
+Define el método que usa el sujeto para notificar cambios en su estado (update/notify).
+**Sujeto concreto (concrete subject):**
+Mantiene el estado de interés para los observadores concretos y los notifica cuando cambia su estado. No tienen porque ser elementos de la misma jerarquía.
+
+**Observador concreto (concrete observer):**
+Mantiene una referencia al sujeto concreto e implementa la interfaz de actualización, es decir, guardan la referencia del objeto que observan, así en caso de ser notificados de algún cambio, pueden preguntar sobre este cambio.
+
+Es uno de los patrones más utilizados, algunos ejemplos típicos son
+
+- Newsletter
+- Sockets
+- Listeners en páginas web
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## Implicaciones sobre Observer
+
+**Problema 1:**
+
+Para evitar que el observador concreto tenga una asociación con el sujeto concreto, se podría hacer que la relación entre sujeto y observador fuese bidireccional, evitando así asociaciones concretas, el problema es que dejaría de ser una interfaz. El que deje de ser una interfaz puede producir problemas si el lenguaje de programación no soporta la [herencia múltiple](https://es.wikipedia.org/wiki/Herencia_m%C3%BAltiple).
+
+Se podría eliminar la bidireccionalidad de la asociación pasando el sujeto como parámetro al método actualizar y ya no se tendría que referenciar el objeto observado. Esto podría causar problemas si se observan varios objetos, tanto de la misma clase como de distintas, ya que no elimina dependencias, y para hacer operaciones específicas sobre el objeto actualizado obliga a hacer en la implementación.
+
+**Problema 2:**
+Si hay muchos sujetos sin observador, la estructura de los observadores está desaprovechada, para solucionarlo se puede tener un intermediario que centralice el almacenamiento de la asociación de cada sujeto con sus observadores. Para esta solución se crea ese gestor de observadores usando el patrón [singleton](https://es.wikipedia.org/wiki/Singleton) (instancia única), ya que proporciona una única referencia y no una por cada sujeto. El gestor aunque mejora el aprovechamiento del espacio, hace que se reduzca el rendimiento y se pierde eficiencia en el método notificar.
+
+**Problema 3:**
+El responsable de iniciar la comunicación es el sujeto concreto, pero se puede dar un problema cuando el objeto concreto está siendo actualizado de forma continua ya que debido a esto se tendría que realizar muchas actualizaciones en muy poco tiempo. La solución sería suspender temporalmente las llamadas al método de actualización/notificación; por ejemplo, haciendo que el cliente pueda activar o desactivar las notificaciones y notificar todos los cambios cuando las vuelva a habilitar. El patrón Estado sería una posible solución para diseñar esta variante de no notificar si no se han dado cambios o hacerlo en caso de que si.
+
+**Problema 4 (referencias inválidas):**
+A la hora de implementar este patrón se debe tener cuidado cuando un elemento observable desaparece. En ciertos lenguajes será el gestor de memoria el que cada cierto tiempo debe de limpiar las referencias liberadas, pero si un observable que sigue siendo observado puede no liberarse nunca. Para solucionar este problema puede crearse una función destruir que notifique al gestor que el elemento observable va a desaparecer y si no se está usando la variante del gestor el observable directamente desregistrará a sus observadores. Antes de esto hay que eliminar las referencias a este elemento, por tanto, hay que eliminar a los observadores antes de eliminar al observable, ya que así se evitará tanto que aparezcan referencias inválidas al objeto una vez este haya sido eliminado, como que se produzcan operaciones inválidas intentando invocarlo.
+
+Se puede avisar a los observadores creando un método actualizar especial, en el que se tendrían dos opciones:
+
+1. El observador también muere.
+2. El observador sigue vivo, pero apunta a nulo.
+
+**Problema 5:**
+Ya que se debe asegurar la consistencia del estado del sujeto antes de iniciar una notificación, siempre se notificará al final, ya que aunque en entorno multihilo se notifica antes de hacer los cambios, puede que los observadores soliciten información al observable cuando aún se van a hacer más cambios y se darían problemas de consistencia si se accede a un estado que aún no es el definitivo. De esta forma, los observadores ya no accederán a sujetos en estado inconsistente.
+
+Por ejemplo:
+
+Secuencia incorrecta:
+a
+b
+c
+notificar()
+d
+e
+f
+Secuencia correcta:
+a
+b
+c
+d
+e
+f
+notificar()
+
+Jerarquía con varios tipos des observadores: en este caso el hilo redefine cambios, no los notifica.
+
+<div align="center">
+  <img src="../assets/JerarquiasObservador.png" alt="jerarquias observador">
+</div>
+
+Jerarquía de varios observadores
+
+**Problema 6:**
+En mecanismos de notificación tradicionalmente hay dos opciones: pull que es la que propone el patrón observador; y push que es la que se tendría si se incluye información como parámetros en el mecanismo de actualización. El problema de hacer esto es que la interfaz del observador se vuelve más específica y por tanto menos genérica y reutilizable.
+
+PULL: los objetos avisan de que han cambiado y el observador pregunta cuál ha sido el cambio.
+
+PUSH: minimiza (eficiencia) que cuando algo cambia y se informará a todos los interesados, se realicen el menor número de llamadas posibles.
+
+Dependiendo del problema que haya que resolver, se habrá de valorar que implementación se ajusta mejor para resolverlo de la forma más eficiente y efectiva o si las variantes anteriores pueden combinarse entre sí dependiendo de las características de escenario concreto. Por ejemplo, la opción 2 podría aplicarse cuando interese aplicar en un sujeto concreto n métodos seguidos y no se quiere notificar hasta que todos finalicen su ejecución.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## Implementación del patrón Observer con Typescript
+
+Docuento HTML:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Observer</title>
+</head>
+<body>
+  <h1>Precio del Bitcoin</h1>
+  <p><em id="price">$0.00</em></p>
+
+  <input type="text" id="value">
+
+  <script src="index.ts"></script>
+</body>
+</html>
+```
+
+Lógica de Typescript
+```ts
+// Definiendo algunas interfaces
+
+interface Observer {
+  updated: (data: any) => void;
+
+}
+
+interface Subject {
+  subscribe: (observer: Observer) => void;
+  unsubscribe: (observer: Observer) => void;
+}
+
+class BitcoinPrice implements Subject {
+  observers: Observer[] = [];
+
+  constructor() {
+    const el: HTMLInputElement = document.querySelector("#value");
+    el.addEventListener('input', () => {
+      this.notify(el.value);
+    })
+  }
+
+  subscribe(observer: Observer) {
+    this.observers.push(observer)
+  }
+
+  unsubscribe(observer: Observer) {
+    const index = this.observers.findIndex(obs => {
+      return obs === observer;
+    })
+
+    this.observers.splice(index, 1);
+  }
+
+  notify(data: any) {
+    this.observers.forEach(observer => observer.updated(data))
+  }
+}
+
+class PriceDisplay implements Observer {
+  private el: HTMLElement;
+
+  constructor() {
+    this.el = document.querySelector("#price");
+  }
+  updated(data: any) { 
+    this.el.innerText = data;
+  }
+}
+
+const value = new BitcoinPrice();
+const display = new PriceDisplay();
+
+// Subscribimos el Display al Value
+value.subscribe(display);
+
+// Simulamos unsubscribe usando un setTimeout de 5 segundos
+setTimeout(
+  () => value.unsubscribe(display),
+  5000
+)
+```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## Casos de uso del patrón Observer: Redux
+
+<div align="center">
+  <img src="../assets/redux.png" alt="redux header">
+</div>
+
+Te ayuda a escribir aplicaciones que se comportan de manera consistente, corren en distintos ambientes (cliente, servidor y nativo), y son fáciles de probar. Además de eso, provee una gran experiencia de desarrollo, gracias a [edición en vivo combinado con un depurador sobre una línea de tiempo](https://github.com/reduxjs/redux-devtools).
+
+Puedes usar Redux combinado con React, o cual cualquier otra librería de vistas. Es muy pequeño (2kB) y no tiene dependencias.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Conceptos básicos
+
+Redux de por si es muy simple.
+
+Imagine que el estado de su aplicación se describe como un simble objeto. Por ejemplo, el estado de una aplicación de tareas (TODO List) puede tener el siguiente aspecto:
+
+```js
+{
+  todos: [{
+    text: 'Comer',
+    completed: true
+  }, {
+    text: 'Hacer ejercicio',
+    completed: false
+  }],
+  visibilityFilter: 'SHOW_COMPLETED'
+}
+```
+
+Este objeto es como un “modelo” excepto que no hay setters. Esto es así para que diferentes partes del código no puedan cambiar el estado arbitrariamente, causando errores difíciles de reproducir.
+
+Para cambiar algo en el estado, es necesario enviar una acción. Una acción es un simple objeto en JavaScript (observe cómo no introducimos ninguna magia) que describe lo que sucedió. A continuación mostramos algunos ejemplos de acciones:
+
+```js
+{ type: 'ADD_TODO', text: 'Ir a nadar a la piscina' }
+{ type: 'TOGGLE_TODO', index: 1 }
+{ type: 'SET_VISIBILITY_FILTER', filter: 'SHOW_ALL' }
+```
+
+Hacer valer que cada cambio sea descrito como una acción nos permite tener una claro entendimiento de lo que está pasando en la aplicación. Si algo cambió, sabemos por qué cambió. Las acciones son como migas de pan (el rastro) de lo que ha sucedido. Finalmente, para juntar el estado y las acciones entre si, escribimos una función llamada reductor (reducer). Una vez más, nada de magia sobre él asunto, es sólo una función que toma el estado y la acción como argumentos y devuelve el siguiente estado de la aplicación. Sería difícil escribir tal función para una aplicación grande, por lo que escribimos funciones más pequeñas que gestionan partes del estado:
+
+```js
+function visibilityFilter(state = 'SHOW_ALL', action) {
+  if (action.type === 'SET_VISIBILITY_FILTER') {
+    return action.filter;
+  } else {
+    return state;
+  }
+}
+
+function todos(state = [], action) {
+  switch (action.type) {
+  case 'ADD_TODO':
+    return state.concat([{ text: action.text, completed: false }]);
+  case 'TOGGLE_TODO':
+    return state.map((todo, index) =>
+      action.index === index ?
+        { text: todo.text, completed: !todo.completed } :
+        todo
+   )
+  default:
+    return state;
+  }
+}
+```
+
+Y escribimos otro reductor que gestiona el estado completo de nuestra aplicación llamando a esos dos reductores por sus respectivas state keys:
+
+```js
+function todoApp(state = {}, action) {
+  return {
+    todos: todos(state.todos, action),
+    visibilityFilter: visibilityFilter(state.visibilityFilter, action)
+  };
+}
+```
+
+Esto es básicamente toda la idea de Redux. Tenga en cuenta que no hemos utilizado ninguna API de Redux. Ya se incluyen algunas utilidades para facilitar este patrón, pero la idea principal es que usted describe cómo su estado se actualiza con el tiempo en respuesta a los objetos de acción, y el 90% del código que se escribe es simplemente JavaScript, sin uso de Redux en si mismo, sus APIs, o cualquier magia.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+<br>

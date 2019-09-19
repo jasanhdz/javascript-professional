@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "prácticas avanzadas de javascript",
   "scripts": {
-    "start": "parcel index.html player-video/index.html typescript/**/*.html"
+    "start": "parcel index.html player-video/index.html typescript/**/*.html singleton/**/*.html observer/index.html"
   },
   "keywords": [
     "javascript",
