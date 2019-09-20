@@ -7,6 +7,80 @@
 - [Scope](#scope)
 - [Clouseres](#clouseres)
 - [¿Quién es This?](#quién-es-this)
+- [Métodos Call y Apply](#métodos-call-y-apply)
+  - [Evitar confundir Apply y Call](#evitar-confundir-apply-y-call)
+- [Bind](#bind)
+- [Diferencias Apply, Call y Bind](#diferencias-apply-call-y-bind)
+- [Prototype](#prototype)
+- [Object create](#object-create)
+- [Herencia Prototipal](#herencia-prototipal)
+- [¿Como funciona Javascript?](#como-funciona-javascript)
+  - [Analizador y Abstract Syntax Tree](#analizador-y-abstract-syntax-tree)
+  - [Fallo en el Parset](#fallo-en-el-parset)
+  - [Eager Parsing (Parser de V8)](#eager-parsing-parser-de-v8))
+  - [Lazy Parsing](#lazy-parsing)
+  - [Tokens](#tokens)
+  - [Abstract Syntax Tree](#abstract-syntax-tree)
+- [Abstract Syntax Tree en Práctica](#abstract-syntax-tree-en-práctica)
+- [Como funciona el Javascript Engine](#como-funciona-el-javascript-engine)
+  - [Bytecode vs Machine Code](#bytecode-vs-machine-code)
+  - [SpiderMonkey vs V8](#spidermonkey-vs-v8)
+- [Event Loop](#event-loop)
+  - [EventLoop con Asincronia](#eventloop-con-asincronia)
+  - [Task Queue](#task-queue)
+  - [Event Loop con Promesas](#event-loop-con-promesas)
+- [Promesas](#promesas)
+- [Getters y Setters](#getters-y-setters)
+- [Proxy](#proxy)
+- [Generadores](#generadores)
+- [Como cancelar peticiones Fetch](#como-cancelar-peticiones-fetch)
+- [Intersection Observer API](#intersection-observer-api)
+  - [Creando un Intersection Observer](#creando-un-intersection-observer)
+  - [Opciones de Intersection observer](#opciones-de-intersection-observer)
+  - [Determinando un elemento para ser observado](#determinando-un-elemento-para-ser-observado)
+- [Creación de Plugin para IntersectionObserver de nuestro videoplayer](#creación-de-plugin-para-intersectionobserver-de-nuestro-videoplayer)
+- [Visibility Change](#visibility-change)
+- [Service worker](#service-worker)
+- [Typescript](#typescript)
+  - [Tipos básicos en Typescript](#tipos-básicos-en-typescript)
+  - [Funciones en Typescript](#funciones-en-typescript)
+  - [Interfaces en Typescript](#interfaces-en-typescript)
+  - [Clases en Typescript](#clases-en-typescript)
+  - [Herencia Typescript](#herencia-typescript)
+- [Modificadores de Acceso en Typescript](#modificadores-de-acceso-en-typescript)
+  - [Público por defecto](#público-por-defecto)
+  - [Private](#private)
+  - [Protected](#protected)
+- [Convertir Proyecto a Typescript](#convertir-proyecto-a-typescript)
+  - [Refactorización](#refactorización)
+- [Patrones de diseño](#patrones-de-diseño)
+- [Objetivos de los patrones de diseño](#objetivos-de-los-patrones-de-diseño)
+  - [Historia sobre Patrones de diseño](#historia-sobre-patrones-de-diseño)
+  - [Beneficios de utilizar patrones de diseño](#beneficios-de-utilizar-patrones-de-diseño)
+  - [Desventajas de utilizar patrones de diseño](#desventajas-de-utilizar-patrones-de-diseño)
+- [Categorias de patrones de diseño](#categorias-de-patrones-de-diseño)
+  - [Patrones Creacionales](#patrones-creacionales)
+  - [Patrones estructurales](#patrones-estructurales)
+  - [ Patrones de comportamiento](#patrones-de-comportamiento)
+- [Patrón Singleton y casos de uso](#patrón-singleton-y-casos-de-uso)
+- [Implementación del patrón Singleton con Typescript](#implementación-del-patrón-singleton-con-typescript)
+  - [Es genial con Typescript](#es-genial-con-typescript)
+  - [Observer (patrón de diseño)](#observer-patrón-de-diseño)
+  - [Objetivo](#objetivo)
+  - [Motivación](#motivación)
+  - [Participantes](#participantes)
+- [Implicaciones sobre Observer](#implicaciones-sobre-observer)
+- [Implementación del patrón Observer con Typescript](#implementación-del-patrón-observer-con-typescript)
+- [Casos de uso del patrón Observer: Redux](#casos-de-uso-del-patrón-observer-redux)
+  - [Conceptos básicos](#conceptos-básicos)
+- [Patrón Decoratory casos de uso](#patrón-decoratory-casos-de-uso)
+  - [Motivation](#decorator-motivation)
+  - [Aplicabilidad](#decorator-aplicabilidad)
+  - [Estructura](#decorator-estructura)
+  - [Participantes](#decorator-participantes)
+  - [Colaboraciones](#decorator-colaboraciones)
+  - [Consecuencias](#decorator-consecuencias)
+  - [Implementación](#decorator-implementación)
 
 ## ¿Como llegá un script al navegador?
 
@@ -66,7 +140,7 @@ function printColor() {
 Podemos observar que la variable global está en el scope global, para evitar eso lo que vamos a hacer es crear una función que se va a llamár autómaticamente
 
 ```js
-// IFEE: immediately invoked function expression
+// IIFE: immediately invoked function expression
 (function () {
   let color = 'green';
 
@@ -78,7 +152,7 @@ Podemos observar que la variable global está en el scope global, para evitar es
 })();
 
 ```
-Sacamos esté codigó del entorno global, lo pasamos a uno de una función y entonces color no cruza al scope global. Cuando tenemos está declaración y está ejecución que se declara afuera de l función interna, **estó es un Closures**. Es la combinación del scope de una función y el scope donde fue definida, donde el scope de la función es la función *IFEE* la función principal, y adentro la función que fue definida dentro de ese scopeque tiene acceso a lo que estaba afuera.
+Sacamos esté codigó del entorno global, lo pasamos a uno de una función y entonces color no cruza al scope global. Cuando tenemos está declaración y está ejecución que se declara afuera de l función interna, **estó es un Closures**. Es la combinación del scope de una función y el scope donde fue definida, donde el scope de la función es la función *IIFE* la función principal, y adentro la función que fue definida dentro de ese scopeque tiene acceso a lo que estaba afuera.
 
 Clouseres nos va a permitir tener una funcionalidad o feture que el lenguaje no trae: variables privadas
 
@@ -340,7 +414,7 @@ Está técnica se llama kurin donde guardamos parcialmente algunos argumentos y 
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-## Diferencias Apply, Call, y Bind
+## Diferencias Apply, Call y Bind
 
 Call y Apply van a establecer el this y va a llamar la función inmediatamente, bind va a crear una nueva función donde this estará guardado y luego tocará guardar y ejecutar esa nueva función.
 
@@ -469,7 +543,7 @@ link.saludar();
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-### Object create
+## Object create
 
 Recibe un objeto y lo que hace es crear un nuevo objeto como lo dice su nombre
 ```js
@@ -687,7 +761,7 @@ Hay veces en que estas asunciones fallan ahí deoptimize(deoptimizamos) el códi
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-#### Fallo en el Parset
+### Fallo en el Parset
 
 Que paso si el parser esta analizando tu programa y de momento hay algó que no hace sentido, justo es cuando ocurre un **sintax error**
 
@@ -707,7 +781,7 @@ La tercer parte significa que el código lo tenemos que empaquetar de una forma 
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-#### Eager Parsing (Parser de V8):
+### Eager Parsing (Parser de V8):
 
 Cuando sea hace este parsing vamos a encontrar todos los errores de sintaxis en el código que se esta analizando y vamos a crear el AST. Que siemplemente es un árbol o arquitectura en forma de árbol que representa tu programa, y además va ha construir los scopes. En este momento vamos a saber que variables se pueden leer en que partes del código 
 
@@ -944,6 +1018,12 @@ Entonces si tenemos un programa como este:
 
 Y así sucesivamente van agregando y quitando ejecuciones en el orden correspondiete.
 
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### EventLoop con Asincronia
+
 Cuando se ejecuta una función asincrona, como por ejemplo un setTimeout, lo reconoce pero no lo ejecuta, sigue con su proceso normal y luego aparece otra vez para ejecutar la función que ejecutaría un setTimeout.
 
 Parece raro pero esta es la asincronia, cosas que van a pasar eventualmente, pues eventualmente pasarán, pero aún no les toca.
@@ -1018,7 +1098,7 @@ Resulta que las promesas van en otra cola, la cola de microtareas **Microtask Qu
 
 ## Promesas
 
-Ya vimos como el event loop procesa las promesas, ahora vamos a volver a las promesas, peroe sta vez vamos a ver como funciona el patrón de *.then* lo vamos a convertir a *async await* y también vamos a aprender diferentes patrones cuando escribimos funciones que nos regresan una promesa, todo esto para facilitar el desarrollo de nuestras apps, todo esto lo vamos a hacer con una api que es libre que se llamá [themoviedb](https://www.themoviedb.org/?language=es-ES).
+Ya vimos como el event loop procesa las promesas, ahora vamos a volver a las promesas, peroe sta vez vamos a ver como funciona el patrón de **.then** lo vamos a convertir a **async await** y también vamos a aprender diferentes patrones cuando escribimos funciones que nos regresan una promesa, todo esto para facilitar el desarrollo de nuestras apps, todo esto lo vamos a hacer con una api que es libre que se llamá [themoviedb](https://www.themoviedb.org/?language=es-ES).
 
 ```js
 // The Movie Database API: https://developers.themoviedb.org/3/getting-started/introduction
@@ -1127,6 +1207,10 @@ p.green; // "Verder"
 p.reed //reee no se encontró. ¿Quisiste decir red?
 p.geen //geen no se encontró. ¿Quisiste decir green?
 ```
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
 
 ## Generadores
 
@@ -1354,15 +1438,15 @@ Un threshold de 1.0 significa que cuando el 100% del elemento target está visib
 
 El objeto options pasado al constructor [IntersectionObserver()](https://developer.mozilla.org/es/docs/Web/API/IntersectionObserver/IntersectionObserver) le deja controlar las circunstancias bajo las cuales la función callback del observer es invocada. Tiene los siguientes campos:
 
-root
+**root**
 
 El elemento que es usado como viewport para comprobar la visibilidad de elemento target. Debe ser un elemento ascendiente del target. Por defecto se toma el viewport del navegador si no se especifica o si se especifica como null.
 
-rootMargin
+**rootMargin**
 
 Margen alrededor del elemeto root. Puede tener valores similares a los de CSS [margin](https://developer.mozilla.org/es/docs/Web/CSS/margin) property, e.g. "10px 20px 30px 40px" (top, right, bottom, left). Los valores pueden ser porcentajes. Este conjunto de valores sirve para aumentar o encoger cada lado del cuadro delimitador del elemento root antes de calcular las intersecciones. Por defecto son todos cero.
 
-threshold
+**threshold**
 
 Es un número o un array de números que indican a que porcentaje de visibilidad del elemento target, la función callback del observer debería ser ejecutada. Si usted quiere que se detecte cuando la visibilidad pasa la marca del 50%, debería usar un valor de 0.5. Si quiere ejecutar la función callback cada vez que la visibilidad pase otro 25%, usted debería especificar el array [0, 0.25, 0.5, 0.75, 1]. El valor por defecto es 0 (lo que significa que tan pronto como un píxel sea visible, la función callback será ejecutada). Un valor de 1.0 significa que el umbral no se considera pasado hasta que todos los pixels son visibles.
 
@@ -1618,7 +1702,7 @@ TypeScript extiende la sintaxis de JavaScript, por tanto cualquier código JavaS
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-## Tipos básicos en Typescript
+### Tipos básicos en Typescript
 
 - boolean. Valor verdadero o falso.
 - number. Números.
@@ -1712,7 +1796,7 @@ const person = fullValue();
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-## Interfaces en Typescript
+### Interfaces en Typescript
 
 Las interfaces nos permiten declarar la forma que tiene un objeto, esto puede ser útil, porque nos ayuda en autocompletado y evitar cometer algunos erroes.
 
@@ -1752,7 +1836,7 @@ Las interfaces definen la forma exacta que debe tener un objeto, no podemos aña
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-## Clases en Typescript
+### Clases en Typescript
 
 JavaScript tradicional utiliza funciones y herencia basada en prototipos para construir componentes reutilizables, pero esto puede resultar un poco incómodo para los programadores más cómodos con un enfoque orientado a objetos, donde las clases heredan la funcionalidad y los objetos se crean a partir de estas clases. A partir de ECMAScript 2015, también conocido como ECMAScript 6, los programadores de JavaScript podrán construir sus aplicaciones utilizando este enfoque basado en clases orientado a objetos. En TypeScript, permitimos que los desarrolladores usen estas técnicas ahora y las compilen en JavaScript que funcione en todos los principales navegadores y plataformas, sin tener que esperar a la próxima versión de JavaScript.
 
@@ -1813,7 +1897,7 @@ Debido a que Dogextiende la funcionalidad desde Animal, pudimos crear una instan
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-## Modificadores públicos, privados y protegidos en Typescript
+## Modificadores de Acceso en Typescript
 
 <div align="right">
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
@@ -1839,7 +1923,7 @@ class Animal {
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-### Comprensión private
+### Private
 Cuando se marca un miembro private, no se puede acceder desde fuera de su clase que lo contiene. Por ejemplo:
 
 ```ts
@@ -1885,7 +1969,7 @@ En este ejemplo, tenemos una Animaly una Rhino, con Rhinoser una subclase de Ani
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-### Compresión Protected
+### Protected
 
 El protectedmodificador actúa de manera muy similar al privatemodificador con la excepción de que los miembros declarados protectedtambién pueden accederse dentro de las clases derivadas. Por ejemplo:
 
@@ -2051,7 +2135,7 @@ El libro design patterns de GoF definio la lita inicial de patrones de diseño d
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-## Patrones Creacionales
+### Patrones Creacionales
 
 Proveen diferentes mecanismos para crear objetos. Nos ayudan a encapsular y abstraer dicha creación:
 
@@ -2126,7 +2210,7 @@ public sealed class Singleton
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 
-## Patrones estrucuturales
+## Patrones estructurales
 
 Describen formas de componer  objetos para formar nuevas estructuras flexibles y eficientes.
 
@@ -2562,3 +2646,204 @@ Esto es básicamente toda la idea de Redux. Tenga en cuenta que no hemos utiliza
   <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
 </div>
 <br>
+
+## Patrón Decoratory casos de uso
+
+Decorator (patrón de diseño)
+
+El patrón [Decorator](https://es.wikipedia.org/wiki/Decorator_(patr%C3%B3n_de_dise%C3%B1o)) responde a la necesidad de añadir dinámicamente funcionalidad a un Objeto. Esto nos permite no tener que crear sucesivas clases que hereden de la primera incorporando la nueva funcionalidad, sino otras que la implementan y se asocian a la primera.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Decorator motivation
+
+Un ejemplo para poder ver la aplicabilidad del patrón decorador podría ser el siguiente:
+
+Disponemos de una herramienta para crear interfaces gráﬁcas, que permite añadir funcionalidades como bordes o barras de desplazamiento a cualquier componente de la interfaz.
+Una posible solución sería utilizar la herencia para extender las responsabilidades de la clase. Si optamos por esta solución, estaríamos haciendo un diseño inflexible (estático), ya que el cliente no puede controlar cuándo y cómo decorar el componente con esa propiedad.
+La solución está en encapsular dentro de otro objeto, llamado Decorador, las nuevas responsabilidades. El decorador redirige las peticiones al componente y, además, puede realizar acciones adicionales antes y después de la redirección. De este modo, se pueden añadir decoradores con cualidades añadidas recursivamente.
+
+<div align="center">
+<img src="../assets/decorator.png" alt="Decorator patterns">
+</div>
+
+En este diagrama de clases, podemos ver que la interfaz decorador implementa la interfaz del componente, redirigiendo todos los métodos al componente visual que encapsula.
+Las subclases decoradoras refinan los métodos del componente, añadiendo responsabilidades.
+También se puede ver que el cliente no necesita hacer distinción entre los componentes visuales decorados y los sin decorar.
+
+<div align="center">
+<img src="../assets/secuencia.png" alt="Decorator patterns">
+</div>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+<br>
+
+### Decorator Aplicabilidad
+
+Añadir responsabilidades a objetos individuales de forma dinámica y transparente
+Responsabilidades de un objeto pueden ser retiradas
+Cuando la extensión mediante la herencia no es viable
+Hay una necesidad de extender la funcionalidad de una clase, pero no hay razones para extenderlo a través de la herencia.
+Existe la necesidad de extender dinámicamente la funcionalidad de un objeto y quizás quitar la funcionalidad extendida.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Decorator: Estructura
+
+<div align="center">
+<img src="../assets/decoratorgenerico.png" alt="Decorator patterns">
+</div>
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Decorator: Participantes
+
+- Componente
+Deﬁne la interfaz para los objetos que pueden tener responsabilidades añadidas.
+
+- Componente Concreto
+Deﬁne un objeto al cual se le pueden agregar responsabilidades adicionales.
+
+- Decorador
+Mantiene una referencia al componente asociado. Implementa la interfaz de la superclase Componente delegando en el componente asociado.
+
+- Decorador Concreto
+Añade responsabilidades al componente.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Decorator Colaboraciones:
+
+El decorador redirige las peticiones al componente asociado.
+Opcionalmente puede realizar tareas adicionales antes y después de redirigir la petición
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Decorator Consecuencias
+
+Más flexible que la herencia. Al utilizar este patrón, se pueden añadir y eliminar responsabilidades en tiempo de ejecución. Además, evita la utilización de la herencia con muchas clases y también, en algunos casos, la herencia múltiple.
+Evita la aparición de clases con muchas responsabilidades en las clases superiores de la jerarquía. Este patrón nos permite ir incorporando de manera incremental responsabilidades.
+Genera gran cantidad de objetos pequeños. El uso de decoradores da como resultado sistemas formados por muchos objetos pequeños y parecidos.
+Puede haber problemas con la identidad de los objetos. Un decorador se comporta como un envoltorio transparente. Pero desde el punto de vista de la identidad de objetos, estos no son idénticos, por lo tanto no deberíamos apoyarnos en la identidad cuando estamos usando decoradores.
+
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+### Decorator Implementación
+
+El patrón Decorator soluciona este problema de una manera mucho más sencilla y extensible.
+
+Se crea a partir de Ventana la subclase abstracta VentanaDecorator y, heredando de ella, BordeDecorator y BotonDeAyudaDecorator. VentanaDecorator encapsula el comportamiento de Ventana y utiliza composición recursiva para que sea posible añadir tantas “capas” de Decorators como se desee. Podemos crear tantos Decorators como queramos heredando de VentanaDecorator.
+
+<div align="center">
+<img src="../assets/openclosed.png" alt="open closed software">
+</div>
+<br>
+
+<div align="center">
+<img src="../assets/monkeypatching.png" alt="monkeypatching">
+</div>
+<br>
+
+<div align="center">
+<img src="../assets/timeexecute.png" alt="timeexecute">
+</div>
+
+<br>
+<div align="right">
+  <small><a href="#tabla-de-contenido">🡡 volver al inicio</a></small>
+</div>
+
+## Implementación del patrón Decorator
+
+Documento HTML:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Decorator Patterns</title>
+</head>
+<body>
+  <div>
+    <h1>Decorator Desgin Patterns</h1>
+    <label for="email">Email</label>
+    <input type="text" id="email">
+  </div>
+</body>
+</html>
+```
+
+```ts
+class Field {
+  errors: string[];
+  input: HTMLInputElement;
+
+  constructor(input: HTMLInputElement) {
+    this.input = input;
+    this.errors = [];
+
+    let errorMessage = document.createElement('p');
+    errorMessage.className = 'text-danger';
+    this.input.parentNode.insertBefore(errorMessage, this.input.nextSibling);
+
+    this.input.addEventListener('input', () => {
+      this.errors = [];
+      this.validate();
+      errorMessage.innerText = this.errors[0] || ' ';
+    })
+  }
+  validate() {}
+}
+
+function RequireFieldDecorator(field: Field): Field {
+  let validate = field.validate;
+
+  field.validate = function () {
+    validate()
+    let value = field.input.value;
+    if (!value) {
+      field.errors.push("Requisito");
+    }
+  };
+
+  return field;
+}
+
+function EmailFieldDecorator(field: Field): Field {
+  let validate = field.validate;
+
+  field.validate = function () {
+    validate()
+    let value = field.input.value;
+
+    if (value.indexOf("@") === -1) {
+      field.errors.push("Debe ser un email");
+    }
+
+  };
+  
+  return field;
+}
+
+let field = new Field(document.querySelector("#email"));
+RequireFieldDecorator(field);
+EmailFieldDecorator(RequireFieldDecorator(field));
+```
+
