@@ -2847,3 +2847,6 @@ RequireFieldDecorator(field);
 EmailFieldDecorator(RequireFieldDecorator(field));
 ```
 
+## Publicar en NPM
+
+Para publicar en npm hay un requisito: necesitas una cuenta en npm, es gratis no cuesta nada, es muy fácil de hacer y esto es todo lo que vas a necesitar 

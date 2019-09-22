@@ -711,6 +711,11 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.3.tgz#f060bf6eaafae4d56a7dac618980838b0696e2ab"
   integrity sha512-FmuxfCuolpLl0AnQ2NHSzoUKWEJDFl63qXjzdoWBVyFCXzMGm1spBzk7LeHNoVCiWCF7mRVms9e6jEV9+MoPbg==
 
+"@jasanhdz/mediaplayer@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@jasanhdz/mediaplayer/-/mediaplayer-1.0.0.tgz#a073ff9b2e6c08efe61f1d8ab55fda4a57e5bbfc"
+  integrity sha512-5u7WOPnUWSiYee6YQ96zUPfV4yvRNx8smuGZLR0+w3EIomFuUWjVLR6PPD9Z18rBJZo3b9gX/lkK3V3kcmRBNw==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
